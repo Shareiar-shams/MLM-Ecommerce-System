@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## AH-Vision
 Ah Vision is an E-commerce and multi media marketing web application. Here you can use all the functionality of ecommerce and with extra you can use this application as a MLM merkting.
 
@@ -58,3 +59,7 @@ Product Details: Clicking on a product displays its detailed description and add
 <hr></hr>
 If you want to contribute or colloborate or want to seek any services, guidence or help connect me through any channel.
 
+=======
+# AhVision
+An innovative platform combining multi-level marketing strategies with e-commerce functionalities to optimize sales and user engagement
+>>>>>>> 4506271ed4fa10320213c6513aae2fb5e3828a96
