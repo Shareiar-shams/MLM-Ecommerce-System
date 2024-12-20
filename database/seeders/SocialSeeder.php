@@ -16,15 +16,15 @@ class SocialSeeder extends Seeder
         $medias = [
             [
                 'media_name' => 'Facebook',
-                'app_id' => '643929170080071',
-                'app_secret' => '038b2100dff9a2a684c85959c0accf66',
+                'app_id' => 'your-app-id',
+                'app_secret' => 'your-app-secret',
                 'redirect_url' => 'http://localhost:8000/auth/facebook/callback',
                 'status' => 1,
             ],
             [
                 'media_name' => 'Google',
-                'app_id' => '915191002660-6hjno4cgnbcm5p1kb3t692trh7pc6ngh.apps.googleusercontent.com',
-                'app_secret' => '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',
+                'app_id' => 'your-app-id',
+                'app_secret' => 'your-app-secret',
                 'redirect_url' => 'http://localhost:8000/auth/google/callback',
                 'status' => 1,
             ]
