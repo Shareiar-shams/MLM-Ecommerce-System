@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ## AH-Vision
 AH-Vision is a web application for E-commerce and multi-media marketing. It offers all the functionality of e-commerce and, with additional features, can be used for MLM marketing.
 
@@ -13,10 +13,12 @@ AH-Vision is a web application for E-commerce and multi-media marketing. It offe
 	- Javascript
 	- Jquery (Plugin)
 	- Slick (Plugin)
+ <br>
 2 Back-end
 	- PHP
 	- Laravel (Framework)
 	- Javascript for Api Implement
+ <br>
 3 Payment Method
 	- Cash On Delivery
 	- bKash
@@ -24,6 +26,24 @@ AH-Vision is a web application for E-commerce and multi-media marketing. It offe
 	- Stripe
 	- SSL Commerze
 <br>
+
+## Description:
+<hr></hr>
+This repository contains a comprehensive MLM and e-commerce system designed to empower businesses with:
+<br>
+
+Multi-Level Marketing: Customizable user hierarchy with commission structures.<br>
+E-commerce Integration: Product catalog, cart, and checkout processes.<br>
+Analytics Dashboard: Insights into sales, commission distribution, and user activity.<br>
+User Management: Role-based access for admins, sellers, and customers.<be>
+
+Key Features:
+
+Commission System: Automatically calculates commissions based on the MLM structure.<br>
+Responsive UI: Fully optimized for both web and mobile platforms.<br>
+Secure Transactions: Payment gateway integration with data encryption.<br>
+Customizable Framework: Built for easy modifications and scalability.<br>
+
 
 ## Features
 <hr></hr>
@@ -49,7 +69,9 @@ Product Details: Clicking on a product displays its detailed description and add
 ## Installation
 
 1 Clone the repository: git clone https://github.com/Shareiar-shams/AH-Vision.git
+<br>
 2 Open the project directory: cd AH-Vision
+<br>
 3 Open the index.html file in your preferred web browser.
 
 
@@ -57,9 +79,10 @@ Product Details: Clicking on a product displays its detailed description and add
 
 ## Contributing
 <hr></hr>
-If you want to contribute or colloborate or want to seek any services, guidence or help connect me through any channel.
+If you want to contribute or collaborate or seek services, guidance, or help, connect with me through any channel.
 
 =======
 # AhVision
+
 An innovative platform combining multi-level marketing strategies with e-commerce functionalities to optimize sales and user engagement
 >>>>>>> 4506271ed4fa10320213c6513aae2fb5e3828a96
