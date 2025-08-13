@@ -675,7 +675,6 @@ php artisan lang:publish
 - **Live Demo**: [https://ahknoxo.com/](https://ahknoxo.com/)
 - **Documentation**: [Wiki Pages](https://github.com/Shareiar-shams/AH-Vision/wiki)
 - **API Reference**: [API Documentation](https://ahknoxo.com/api/docs)
-- **Video Tutorials**: [YouTube Channel](https://youtube.com/ahvision)
 
 ## 🤝 Contributing
 
