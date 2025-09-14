@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Console\Scheduling\Event;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        parent::boot();
+        // parent::boot();
 
         Event::listen(Login::class, function ($event) {
             if ($event->guard === 'admin') {
