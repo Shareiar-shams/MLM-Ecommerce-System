@@ -12,7 +12,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
-                    <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ Auth::guard('admin')->user()->avatar }}" class="img-circle elevation-2" alt="User Image">
                 @else
                     <img src="{{asset('admin/dist/img/avatar4.png')}}" class="img-circle elevation-2" alt="User Image">
                 @endif
