@@ -63,7 +63,7 @@ class AdminAuthenticatedSessionController extends Controller
             //     'user_agent' => $request->userAgent()
             // ]);
 
-            return redirect()->intended(route('admin.home'));
+            return redirect()->intended();
         }
 
         // If authentication fails
