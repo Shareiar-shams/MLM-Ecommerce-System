@@ -2,10 +2,12 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin\Relations\AdminRelations;
 use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 /**
  * Admin Model
@@ -24,8 +26,9 @@ use Illuminate\Notifications\Notifiable;
  */
 class Admin extends Authenticatable
 {
-    use Notifiable, HasImage;
+    use Notifiable, HasImage, CausesActivity;
 
+    use AdminRelations;
     /**
      * The authentication guard for the model.
      *
