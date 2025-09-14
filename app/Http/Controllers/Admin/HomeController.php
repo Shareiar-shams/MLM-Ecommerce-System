@@ -33,6 +33,8 @@ class HomeController extends Controller
      */
     public function create()
     {
+        // $admin = auth('admin')->user();
+        // $activities = $admin->activities()->latest()->get();
         return view('admin.profile.index');
     }
 
