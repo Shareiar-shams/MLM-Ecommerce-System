@@ -11,7 +11,7 @@ Route::controller(HomeController::class)->group( function () {
     Route::get('profile', 'create')->name('profile');
 
     // Admin Profile Management
-    Route::post('image/update/{id}', 'imgupdate')->name('image.update');
+    Route::put('image/update/{id}', 'imgupdate')->name('image.update');
     Route::put('password/update/{id}', 'passupdate')->name('password.update');
     Route::put('profile/update/{id}', 'update')->name('profile.update');
     
