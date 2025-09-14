@@ -2,10 +2,18 @@
 
 namespace App\Services\Admin;
 
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ImageService
 {
+    protected $imageManager;
+
+    public function __construct()
+    {
+        $this->imageManager = new ImageManager(new Driver());
+    }
+
     public function uploadAndResize($file, $folder, $filename = null)
     {
         $filename = $filename ?? uniqid().'.'.$file->getClientOriginalExtension();
@@ -25,12 +33,12 @@ class ImageService
         // Full (800x800)
         $this->resizeAndSave($file, $folder.'/full', $filename, 800, 800);
 
-        return $filename; // save filename to database
+        return $filename;
     }
 
     private function resizeAndSave($file, $folder, $filename, $width, $height)
     {
-        $image = Image::make($file)->fit($width, $height);
+        $image = $this->imageManager->read($file)->cover($width, $height);
         $path = storage_path('app/public/'.$folder);
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
