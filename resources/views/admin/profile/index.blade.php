@@ -34,7 +34,7 @@
 				            	<p><input type="file" accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;" required></p>
 
 				            	@if(Auth::guard('admin')->user()->image != 'noimage.jpg')
-					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
+					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{ Auth::guard('admin')->user()->thumbnail }}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
 					            @else
 					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{asset('admin/dist/img/avatar4.png')}}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
 					            @endif
