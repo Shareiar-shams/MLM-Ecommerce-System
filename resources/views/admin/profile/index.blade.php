@@ -118,10 +118,16 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Logged in from IP 192.168.1.10 - 5 mins ago</li>
-                            <li class="list-group-item">Changed password - 2 days ago</li>
-                            <li class="list-group-item">Updated profile picture - 1 week ago</li>
-                            <li class="list-group-item">Deleted a blog post - 2 weeks ago</li>
+                            @forelse($activities as $activity)
+                            <li class="list-group-item">
+                                <p> 
+                                    {{ $activity->created_at->diffForHumans() }} -
+                                    {{ $activity->description }} -
+                                    URL: {{ $activity->properties['url'] ?? '' }}
+                                </p>
+                            </li>
+                            @empty
+                            @endforelse
                         </ul>
                     </div>
                 </div>
