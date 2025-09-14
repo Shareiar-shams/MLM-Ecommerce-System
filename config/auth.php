@@ -43,6 +43,8 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+            'passwords' => 'admins',
+            'session' => 'admin_session',
         ],
     ],
 
