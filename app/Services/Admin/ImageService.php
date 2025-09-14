@@ -25,7 +25,7 @@ class ImageService
         // Full (800x800)
         $this->resizeAndSave($file, $folder.'/full', $filename, 800, 800);
 
-        return $filename; // database এ শুধু filename save করো
+        return $filename; // save filename to database
     }
 
     private function resizeAndSave($file, $folder, $filename, $width, $height)
