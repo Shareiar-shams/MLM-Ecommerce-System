@@ -29,7 +29,8 @@
 		            <div class="card-body box-profile">
 		                <div class="text-center">
 		                  	<form action="{{route('admin.image.update', Auth::guard('admin')->user()->id)}}" method="post" enctype="multipart/form-data">
-								{{csrf_field()}}
+								@csrf
+                                @method('PUT')
 				            	<p><input type="file" accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;" required></p>
 
 				            	@if(Auth::guard('admin')->user()->image != 'noimage.jpg')
