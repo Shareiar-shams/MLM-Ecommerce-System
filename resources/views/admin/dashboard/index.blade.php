@@ -1,0 +1,68 @@
+@extends('admin.layouts.main')
+@section('admin_title_content')
+    AHVision | Dashboard
+@endsection
+@section('admin_content_header')
+  <div class="col-sm-6">
+    <h1 class="m-0">Dashboard</h1>
+  </div><!-- /.col -->
+  @php 
+    $list = json_encode(['Home', 'Dashboard']);
+  @endphp
+  <x-ad-breadcrumb :list="$list"/>
+@endsection
+@section('admin_vendor_css')
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/jqvmap/jqvmap.min.css')}}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/summernote/summernote-bs4.min.css')}}">
+@endsection
+
+@section('admin_custom_css')
+@endsection
+
+@section('admin_main_content')
+
+    <div class="container-fluid">
+        
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+    
+@endsection
+@section('admin_vendor_js')
+
+    <!-- ChartJS -->
+    <script src="{{asset('admin/plugins/chart.js/Chart.min.js')}}"></script>
+    <!-- Sparkline -->
+    <script src="{{asset('admin/plugins/sparklines/sparkline.js')}}"></script>
+    <!-- JQVMap -->
+    <script src="{{asset('admin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+    <script src="{{asset('admin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{asset('admin/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+    <!-- daterangepicker -->
+    <script src="{{asset('admin/plugins/moment/moment.min.js')}}"></script>
+    <script src="{{asset('admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{{asset('admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <!-- Summernote -->
+    <script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{{asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="{{asset('admin/dist/js/pages/dashboard.js')}}"></script>
+@endsection
+
+@section('admin_custom_js')
+    
+@endsection
