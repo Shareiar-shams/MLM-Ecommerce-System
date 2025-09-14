@@ -17,7 +17,21 @@ class AdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('admin')->check()) {
+            
             return redirect()->route('admin.login');
+        }
+
+        $admin = Auth::guard('admin')->user();
+        $method = $request->method();
+        if (in_array($method, ['POST', 'PUT', 'DELETE'])) {
+            activity()
+                ->causedBy($admin)
+                ->withProperties([
+                    'url' => $request->fullUrl(),
+                    'method' => $method,
+                    'input' => $request->except(['password', 'password_confirmation']),
+                ])
+                ->log("Admin performed {$method} request");
         }
         return $next($request);
     }
