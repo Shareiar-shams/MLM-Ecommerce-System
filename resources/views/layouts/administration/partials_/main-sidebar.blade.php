@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{asset('admin/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{config('app.name')}}</span>
     </a>
 
@@ -14,7 +14,7 @@
                 @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
                     <img src="{{ Auth::guard('admin')->user()->avatar }}" class="img-circle elevation-2" alt="User Image">
                 @else
-                    <img src="{{asset('admin/dist/img/avatar4.png')}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{asset('admin/assets/img/avatar4.png')}}" class="img-circle elevation-2" alt="User Image">
                 @endif
             </div>
             <div class="info">
@@ -37,25 +37,25 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @include('admin.layouts.partials_.sidebar-nav.dashboard')
-                @include('admin.layouts.partials_.sidebar-nav.categories.manage')
-                @include('admin.layouts.partials_.sidebar-nav.product-type.manage')
-                @include('admin.layouts.partials_.sidebar-nav.product.manage')
-                @include('admin.layouts.partials_.sidebar-nav.orders.manage')
-                @include('admin.layouts.partials_.sidebar-nav.digital-product.manage')
-                @include('admin.layouts.partials_.sidebar-nav.mlm-user.manage')
-                @include('admin.layouts.partials_.sidebar-nav.transactions')
-                @include('admin.layouts.partials_.sidebar-nav.ecommerce.manage')
-                @include('admin.layouts.partials_.sidebar-nav.tickets.manage')
-                @include('admin.layouts.partials_.sidebar-nav.site.manage')
-                @include('admin.layouts.partials_.sidebar-nav.faqs.manage')
-                @include('admin.layouts.partials_.sidebar-nav.pages')
-                @include('admin.layouts.partials_.sidebar-nav.social-icon')
-                @include('admin.layouts.partials_.sidebar-nav.customers-list')
-                @include('admin.layouts.partials_.sidebar-nav.subscribers-list')
-                @include('admin.layouts.partials_.sidebar-nav.email-lists')
-                @include('admin.layouts.partials_.sidebar-nav.system-user.manage')
-                @include('admin.layouts.partials_.sidebar-nav.cache-clear')
+                @include('layouts.administration.partials_.sidebar-nav.dashboard')
+                @include('layouts.administration.partials_.sidebar-nav.categories.manage')
+                @include('layouts.administration.partials_.sidebar-nav.product-type.manage')
+                @include('layouts.administration.partials_.sidebar-nav.product.manage')
+                @include('layouts.administration.partials_.sidebar-nav.orders.manage')
+                @include('layouts.administration.partials_.sidebar-nav.digital-product.manage')
+                @include('layouts.administration.partials_.sidebar-nav.mlm-user.manage')
+                @include('layouts.administration.partials_.sidebar-nav.transactions')
+                @include('layouts.administration.partials_.sidebar-nav.ecommerce.manage')
+                @include('layouts.administration.partials_.sidebar-nav.tickets.manage')
+                @include('layouts.administration.partials_.sidebar-nav.site.manage')
+                @include('layouts.administration.partials_.sidebar-nav.faqs.manage')
+                @include('layouts.administration.partials_.sidebar-nav.pages')
+                @include('layouts.administration.partials_.sidebar-nav.social-icon')
+                @include('layouts.administration.partials_.sidebar-nav.customers-list')
+                @include('layouts.administration.partials_.sidebar-nav.subscribers-list')
+                @include('layouts.administration.partials_.sidebar-nav.email-lists')
+                @include('layouts.administration.partials_.sidebar-nav.system-user.manage')
+                @include('layouts.administration.partials_.sidebar-nav.cache-clear')
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
