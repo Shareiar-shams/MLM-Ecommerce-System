@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('layouts.administration.app')
 @section('admin_title_content')
     AHVision | Dashboard Profile
 @endsection
