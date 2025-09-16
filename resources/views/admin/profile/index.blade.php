@@ -36,7 +36,7 @@
 				            	@if(Auth::guard('admin')->user()->image != 'noimage.jpg')
 					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{ Auth::guard('admin')->user()->thumbnail }}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
 					            @else
-					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{asset('admin/dist/img/avatar4.png')}}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
+					              	<label for="file" style="cursor: pointer; display: inline;"><img src="{{asset('admin/assets/img/avatar4.png')}}" class="profile-user-img img-responsive img-circle" alt="User profile picture" id="output"></label>
 					            @endif
 
 								<input type="submit" class="btn btn-primary btn-block" style="font-weight: bold;" value="Change Profile Picture">
