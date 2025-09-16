@@ -117,7 +117,7 @@
 	    <li class="pt-2 nav-item dropdown user user-menu">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	            @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
-	                <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="user-image" alt="User Image">
+	                <img src="{{ Auth::guard('admin')->user()->avatar }}" class="user-image" alt="User Image">
 	            @else
 	                <img src="{{asset('admin/assets/img/avatar4.png')}}" class="user-image" alt="User Image">
 	            @endif
@@ -126,7 +126,7 @@
                 <!-- User image -->
                 <li class="user-header">
                     @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
-                        <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="img-circle" alt="User Image">
+                        <img src="{{ Auth::guard('admin')->user()->thumbnail }}" class="img-circle" alt="User Image">
                     @else
                         <img src="{{asset('admin/assets/img/avatar4.png')}}" class="img-circle" alt="User Image">
                     @endif
