@@ -9,17 +9,17 @@
       @show
   </title>
 
-  @include('admin.layouts.partials_.admin-css')
+  @include('layouts.administration.partials_.admin-css')
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
       <!-- Navbar -->
-      @include('admin.layouts.navigation')
+      @include('layouts.administration.navigation')
       <!-- /.navbar -->
 
-      @include('admin.layouts.partials_.main-sidebar')
+      @include('layouts.administration.partials_.main-sidebar')
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -29,7 +29,7 @@
                   <div class="row mb-2">
                       @section('admin_content_header')
                         @show
-                      {{-- @include('admin.layouts.partials_.content-header') --}}
+                      {{-- @include('layouts.administration.partials_.content-header') --}}
                       
                   </div><!-- /.row -->
               </div><!-- /.container-fluid -->
@@ -44,7 +44,7 @@
           </section>
           <!-- /.content -->
       </div>
-      @include('admin.layouts.partials_.footer')
+      @include('layouts.administration.partials_.footer')
       
 
       <!-- Control Sidebar -->
@@ -54,7 +54,7 @@
       <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    @include('admin.layouts.partials_.admin-js')
+    @include('layouts.administration.partials_.admin-js')
     
 </body>
 </html>
