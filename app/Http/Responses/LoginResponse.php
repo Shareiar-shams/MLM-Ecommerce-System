@@ -10,16 +10,19 @@ class LoginResponse implements LoginResponseContract
         $user = $request->user();
 
         // Only apply this rule for admin guard
-        if ($request->routeIs('admin.login') || $request->guard === 'admin') {
-            // Get the intended URL (from session)
-            $intended = session()->pull('url.intended', route('admin.home'));
+        if ($request->is('admin/*') || $request->routeIs('admin.login')) {
+            $lastAdminUrl = session()->pull('last_admin_url');
+            $intended     = session()->pull('url.intended', route('admin.home'));
 
-            // Check if the intended URL is within admin dashboard
+            // Priority: last admin URL > intended admin URL > dashboard
+            if ($lastAdminUrl) {
+                return redirect()->to($lastAdminUrl);
+            }
+
             if (str_contains($intended, '/admin')) {
                 return redirect()->to($intended);
             }
- 
-            // Otherwise, always redirect to admin dashboard
+
             return redirect()->route('admin.home');
         }
 
