@@ -54,7 +54,7 @@
 			        <a href="" class="dropdown-item">
 			            <!-- Message Start -->
 			            <div class="media">
-			              	<img @if(isset($notification->mlmuser->user->profile_image))src="{{Storage::disk('local')->url($notification->mlmuser->user->profile_image)}}" @else src="{{asset('admin/dist/img/noimage.jpg')}}" @endif alt="User Avatar" class="img-size-50 mr-3 img-circle">
+			              	<img @if(isset($notification->mlmuser->user->profile_image))src="{{Storage::disk('local')->url($notification->mlmuser->user->profile_image)}}" @else src="{{asset('admin/assets/img/noimage.jpg')}}" @endif alt="User Avatar" class="img-size-50 mr-3 img-circle">
 				            <div class="media-body">
 				                <h3 class="dropdown-item-title">
 				                  	{{$notification->mlmuser->user->name}}
@@ -119,7 +119,7 @@
 	            @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
 	                <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="user-image" alt="User Image">
 	            @else
-	                <img src="{{asset('admin/dist/img/avatar4.png')}}" class="user-image" alt="User Image">
+	                <img src="{{asset('admin/assets/img/avatar4.png')}}" class="user-image" alt="User Image">
 	            @endif
           	</a>
             <ul class="dropdown-menu">
@@ -128,33 +128,30 @@
                     @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
                         <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="img-circle" alt="User Image">
                     @else
-                        <img src="{{asset('admin/dist/img/avatar4.png')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset('admin/assets/img/avatar4.png')}}" class="img-circle" alt="User Image">
                     @endif
                     <p>
                       	{{ Auth::guard('admin')->user()->name }} - {{Auth::guard('admin')->user()->position}}
                     </p>
                 </li>
-                <li class="user-footer flex row ml-1">
-                    <div class="pull-left">
-                    	<x-ad-nav-link href="{{route('admin.profile')}}" class="btn btn-default btn-flat">
-			                Profile
-			            </x-ad-nav-link>
-                    </div>
-                    <div class="pull-right ml-5">
-                    	<!-- Authentication -->
-                    	<div class="btn btn-default btn-flat">
-                    		
-			                <form method="POST" action="{{ route('admin.logout') }}">
-			                    @csrf
-
-			                    <x-responsive-nav-link :href="route('admin.logout')"
-			                            onclick="event.preventDefault();
-			                                        this.closest('form').submit();">
-			                        {{ __('Log Out') }}
-			                    </x-responsive-nav-link>
-			                </form>
-                    	</div>
-
+                <li class="user-footer w-100 px-3 py-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <x-ad-nav-link href="{{route('admin.profile')}}" class="btn btn-default btn-flat">
+                                Profile
+                            </x-ad-nav-link>
+                        </div>
+                        <div>
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('admin.logout') }}">
+                                @csrf
+                                <a href="route('admin.logout')" class="btn btn-default btn-flat"
+                                    onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </li>
             </ul>

@@ -9,9 +9,9 @@
 
         <!-- Google Font: Source Sans Pro -->
   		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  		<link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
-  		<link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  		<link rel="stylesheet" type="text/css" href="{{asset('admin/dist/css/adminlte.min.css')}}">
+  		<link rel="stylesheet" type="text/css" href="{{asset('admin/assets/plugins/fontawesome-free/css/all.min.css')}}">
+  		<link rel="stylesheet" type="text/css" href="{{asset('admin/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  		<link rel="stylesheet" type="text/css" href="{{asset('admin/assets/dist/css/adminlte.min.css')}}">
         <!-- Scripts -->
         {{-- <script src="{{asset('js/login.js')}}" type="text/javascript" charset="utf-8" async defer></script>  --}}
         {{-- @vite(['resources/js/login.js']) --}}
@@ -74,8 +74,8 @@
 		</div>
 		<!-- /.login-box -->
 
-		<script src="{{asset('admin/plugins/jquery/jquery.min.js')}}" type="text/javascript"></script>
-		<script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
-		<script src="{{asset('admin/dist/js/adminlte.min.js')}}" type="text/javascript"></script>
+		<script src="{{asset('admin/assets/plugins/jquery/jquery.min.js')}}" type="text/javascript"></script>
+		<script src="{{asset('admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+		<script src="{{asset('admin/assets/dist/js/adminlte.min.js')}}" type="text/javascript"></script>
     </body>
 </html>

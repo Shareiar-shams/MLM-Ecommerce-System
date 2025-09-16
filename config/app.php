@@ -17,6 +17,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Logo
+    |--------------------------------------------------------------------------
+    |
+    | This value is the URL or path of your application's logo. This can be
+    | used throughout the application to dynamically display the logo
+    | wherever needed.
+    |
+    */
+    'logo' => env('APP_LOGO', 'logo/logo.png'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Favicon
+    |--------------------------------------------------------------------------
+    |
+    | This value is the URL or path of your application's favicon. This can be
+    | used in the `<head>` section of your layout for dynamic favicon usage.
+    |
+    */
+    'favicon' => env('APP_FAVICON', 'logo/favicon_io/favicon.ico'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

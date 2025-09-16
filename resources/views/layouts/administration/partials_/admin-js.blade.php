@@ -1,22 +1,22 @@
 <!-- jQuery -->
-<script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{asset('admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 {{-- external vendor js --}}
 @section('admin_vendor_js')
     @show
 
 <!-- AdminLTE App -->
-<script src="{{asset('admin/dist/js/adminlte.js')}}"></script>
+<script src="{{asset('admin/assets/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('admin/dist/js/demo.js')}}"></script>
+<script src="{{asset('admin/assets/dist/js/demo.js')}}"></script>
 
 <!-- Page specific script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>

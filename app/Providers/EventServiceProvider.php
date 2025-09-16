@@ -28,6 +28,12 @@ class EventServiceProvider extends ServiceProvider
             if ($event->guard === 'admin') {
                 activity()
                     ->causedBy($event->user)
+                    ->event('login')
+                    ->withProperties([
+                        'url' => request()->fullUrl(),
+                        'ip'  => request()->ip(),
+                        'user_agent' => request()->userAgent(),
+                    ])
                     ->log('Admin logged in');
             }
         });
@@ -36,6 +42,12 @@ class EventServiceProvider extends ServiceProvider
             if ($event->guard === 'admin') {
                 activity()
                     ->causedBy($event->user)
+                    ->event('logout')
+                    ->withProperties([
+                        'url' => request()->fullUrl(),
+                        'ip'  => request()->ip(),
+                        'user_agent' => request()->userAgent(),
+                    ])
                     ->log('Admin logged out');
             }
         });

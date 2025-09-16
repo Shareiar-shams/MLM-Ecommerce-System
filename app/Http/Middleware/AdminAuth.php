@@ -14,7 +14,7 @@ class AdminAuth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$guards): Response
     {
         if (!Auth::guard('admin')->check()) {
             
@@ -32,6 +32,10 @@ class AdminAuth
                     'input' => $request->except(['password', 'password_confirmation']),
                 ])
                 ->log("Admin performed {$method} request");
+        }
+
+        if ($request->is('admin/*') && !$request->is('admin/login') && !$request->is('admin/logout')) {
+            session(['last_admin_url' => $request->fullUrl()]);
         }
         return $next($request);
     }

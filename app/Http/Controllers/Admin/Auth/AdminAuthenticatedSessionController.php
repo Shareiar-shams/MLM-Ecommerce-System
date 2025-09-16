@@ -4,13 +4,30 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLoginRequest;
+use App\Http\Responses\LoginResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class AdminAuthenticatedSessionController extends Controller
 {
+    /**
+     * Where to redirect admins after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/admin/dashboard';
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
+
     /**
      * Display the admin login view.
      *
@@ -63,7 +80,7 @@ class AdminAuthenticatedSessionController extends Controller
             //     'user_agent' => $request->userAgent()
             // ]);
 
-            return redirect()->intended();
+            return app(LoginResponse::class)->toResponse($request);
         }
 
         // If authentication fails
