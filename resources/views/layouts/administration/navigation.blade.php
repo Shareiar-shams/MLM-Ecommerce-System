@@ -54,7 +54,7 @@
 			        <a href="" class="dropdown-item">
 			            <!-- Message Start -->
 			            <div class="media">
-			              	<img @if(isset($notification->mlmuser->user->profile_image))src="{{Storage::disk('local')->url($notification->mlmuser->user->profile_image)}}" @else src="{{asset('admin/dist/img/noimage.jpg')}}" @endif alt="User Avatar" class="img-size-50 mr-3 img-circle">
+			              	<img @if(isset($notification->mlmuser->user->profile_image))src="{{Storage::disk('local')->url($notification->mlmuser->user->profile_image)}}" @else src="{{asset('admin/assets/img/noimage.jpg')}}" @endif alt="User Avatar" class="img-size-50 mr-3 img-circle">
 				            <div class="media-body">
 				                <h3 class="dropdown-item-title">
 				                  	{{$notification->mlmuser->user->name}}
@@ -119,7 +119,7 @@
 	            @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
 	                <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="user-image" alt="User Image">
 	            @else
-	                <img src="{{asset('admin/dist/img/avatar4.png')}}" class="user-image" alt="User Image">
+	                <img src="{{asset('admin/assets/img/avatar4.png')}}" class="user-image" alt="User Image">
 	            @endif
           	</a>
             <ul class="dropdown-menu">
@@ -128,7 +128,7 @@
                     @if(Auth::guard('admin')->user()->image != 'noimage.jpg')
                         <img src="{{Storage::disk('local')->url(Auth::guard('admin')->user()->image)}}" class="img-circle" alt="User Image">
                     @else
-                        <img src="{{asset('admin/dist/img/avatar4.png')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset('admin/assets/img/avatar4.png')}}" class="img-circle" alt="User Image">
                     @endif
                     <p>
                       	{{ Auth::guard('admin')->user()->name }} - {{Auth::guard('admin')->user()->position}}
