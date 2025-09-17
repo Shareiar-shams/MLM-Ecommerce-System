@@ -32,5 +32,6 @@ Route::prefix('admin')->name('admin.')->group( function () {
     // ========================================
     Route::middleware(['admin'])->group(function () {
         require __DIR__.'/Admin/dashboard.php';
+        require __DIR__.'/Admin/categories.php';
     });
 });
