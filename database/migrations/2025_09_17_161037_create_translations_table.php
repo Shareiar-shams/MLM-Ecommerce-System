@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('translated_text');// Translated output
             $table->timestamps();
             $table->unique(['source_text', 'locale']); // Prevent duplicates
+            $table->softDeletes();
         });
     }
 
