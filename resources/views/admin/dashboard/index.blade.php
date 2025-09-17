@@ -3,13 +3,13 @@
     AHVision | Dashboard
 @endsection
 @section('admin_content_header')
-  <div class="col-sm-6">
-    <h1 class="m-0">Dashboard</h1>
-  </div><!-- /.col -->
-  @php 
-    $list = json_encode(['Home', 'Dashboard']);
-  @endphp
-  <x-ad-breadcrumb :list="$list"/>
+    <div class="col-sm-6">
+        <h1 class="m-0">Dashboard</h1>
+    </div><!-- /.col -->
+    <!-- breadcrumb -->
+    <x-ad-breadcrumb :items="[
+        ['label' => 'Dashboard', 'url' => route('admin.home')],
+    ]" />
 @endsection
 @section('admin_vendor_css')
     <!-- Ionicons -->
@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/summernote/summernote-bs4.min.css')}}">
 @endsection
 
-@section('admin_custom_css')
+@section('admin_page_css')
 @endsection
 
 @section('admin_main_content')
@@ -63,6 +63,6 @@
     <script src="{{asset('admin/assets/dist/js/pages/dashboard.js')}}"></script>
 @endsection
 
-@section('admin_custom_js')
+@section('admin_page_js')
     
 @endsection
