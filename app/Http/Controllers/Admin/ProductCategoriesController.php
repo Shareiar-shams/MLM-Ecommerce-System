@@ -3,16 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories\Categories;
+use App\Services\Admin\Categories\CategoriesService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ProductCategoriesController extends Controller
 {
+    protected $categoriesService;
+
+    public function __construct(CategoriesService $categoriesService)
+    {
+        $this->categoriesService = $categoriesService;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $categories = Categories::with('children')->whereNull('parent_id')->orderBy('id','DESC')->get();
+        return view('admin.product.categories.index',compact('categories'));
     }
 
     /**
@@ -20,7 +30,12 @@ class ProductCategoriesController extends Controller
      */
     public function subcategories(Request $request)
     {
-        //
+        $parent_id = $request->parent_id;
+         
+        $subcategories = Categories::where('parent_id',$parent_id)->with('children')->get();
+        return response()->json([
+            'subcategories' => $subcategories
+        ]);
     }
 
     /**
@@ -36,7 +51,20 @@ class ProductCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'parent_id' => 'nullable|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:categories,slug',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:active,inactive',
+        ]);
+        Categories::create($validatedData);       
+        $notification = array(
+            'message' => 'Category create successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect(route('categories.index'))->with($notification);
     }
 
     /**
