@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use App\Exceptions\ErrorConfiguration;
+use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\Log;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(AdminAuth::class);
         $middleware->alias([
             'admin' => AdminAuth::class,
+            'localization' => Localization::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
