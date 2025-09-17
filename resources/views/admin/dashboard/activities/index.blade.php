@@ -49,7 +49,9 @@
                                         <td>{{ $activity->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @empty
-                                    
+                                    <tr>
+                                        <td colspan="3" class="text-center">No activity found.</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
