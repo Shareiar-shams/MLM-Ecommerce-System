@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-  {{-- Meta Starts --}}
+    {{-- Meta Starts --}}
     @include('layouts.administration.partials_.metas')
     {{-- Meta Ends --}}
-  <title>
-    @section('admin_title_content')
-      @show
-  </title>
-
-  @include('layouts.administration.partials_.admin-css')
+    <title>
+      @section('admin_title_content')
+        @show
+    </title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset(config('app.favicon')) }}" />
+    @include('layouts.administration.partials_.admin-css')
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
