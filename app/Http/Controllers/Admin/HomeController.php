@@ -111,6 +111,15 @@ class HomeController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function cache()
+    {
+        $this->dashboardService->clearCache();
+
+        return redirect()->back()->with([
+            'message' => 'Application Cache Cleared Successfully!',
+            'alert-type' => 'success',
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      */

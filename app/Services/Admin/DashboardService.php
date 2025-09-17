@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Admin\Admin;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardService
@@ -63,5 +64,13 @@ class DashboardService
         $admin->save();
 
         return $admin;
+    }
+
+    public function clearCache(): void
+    {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
     }
 }
