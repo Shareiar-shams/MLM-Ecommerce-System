@@ -15,6 +15,9 @@ Route::controller(HomeController::class)->group( function () {
     Route::put('password/update/{id}', 'passupdate')->name('password.update');
     Route::put('profile/update/{id}', 'update')->name('profile.update');
     
+    // admin Activity Log
+    Route::get('activities', 'activities')->name('activities.index');
+    
     // Cache Management
     Route::get('cache/clear', 'cache')->name('cache.clear');
 });

@@ -34,11 +34,21 @@ class HomeController extends Controller
     public function create()
     {
         $admin = auth('admin')->user();
-        $activities = $admin->activities()->latest()->get();
+        $activities = $admin->activities()->latest()->get()->take(10);
  
         return view('admin.profile.index', compact('activities'));
     }
 
+    /**
+     * Display a listing of admin activities.
+     */
+    public function activities(): View
+    {
+        $admin = auth('admin')->user();
+        $activities = $admin->activities()->latest()->get();
+ 
+        return view('admin.dashboard.activities.index', compact('activities'));
+    }
     /**
      * Store a newly created resource in storage.
      */
