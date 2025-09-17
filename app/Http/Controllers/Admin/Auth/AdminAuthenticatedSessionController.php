@@ -80,7 +80,7 @@ class AdminAuthenticatedSessionController extends Controller
             //     'user_agent' => $request->userAgent()
             // ]);
 
-            return app(LoginResponse::class)->toResponse($request);
+            return redirect()->intended($this->redirectTo);
         }
 
         // If authentication fails
