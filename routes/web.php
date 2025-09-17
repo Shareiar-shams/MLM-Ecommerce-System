@@ -30,7 +30,10 @@ Route::prefix('admin')->name('admin.')->group( function () {
     // ========================================
     // AUTHENTICATED ADMIN ROUTES
     // ========================================
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['admin', 'localization'])->group(function () {
         require __DIR__.'/Admin/dashboard.php';
+
+        // localization
+        require __DIR__.'/Admin/localization.php';
     });
 });
