@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use App\Models\Admin\Relations\AdminRelations;
 use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -29,6 +30,8 @@ class Admin extends Authenticatable
     use Notifiable, HasImage, CausesActivity;
 
     use AdminRelations;
+
+    use SoftDeletes;
     /**
      * The authentication guard for the model.
      *
