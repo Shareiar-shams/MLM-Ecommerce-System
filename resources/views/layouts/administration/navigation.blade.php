@@ -41,6 +41,26 @@
 	        </div>
       	</li>
 
+		<!-- language change -->
+		<li class="nav-item dropdown">
+	        <x-ad-nav-link data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				<i class="fas fa-language"></i>
+			</x-ad-nav-link>
+	        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+				@foreach (config('localization.languages') as $lang)
+					<a class="dropdown-item" href="{{ route('admin.localization', ['lang' => $lang['key']]) }}" data-language="{{ $lang['key'] }}">
+						<span class="align-middle">{{ $lang['value'] }}</span>
+					</a>
+					<div class="dropdown-divider"></div>
+				@endforeach
+				
+				{{-- <div class="dropdown-divider"></div>
+				<a href="{{ route('admin.language', ['es']) }}" class="dropdown-item">
+					<i class="flag-icon flag-icon-es mr-2"></i> Spanish
+				</a> --}}
+			</div>
+		</li>
+		<!-- language change end -->
 	    <!-- Messages Dropdown Menu -->
 	    <li class="nav-item dropdown">
 	    	<x-ad-nav-link data-toggle="dropdown">
@@ -73,6 +93,7 @@
 	          	<a href="" class="dropdown-item dropdown-footer">See All Messages</a>
 	        </div>
 	    </li>
+
       	<!-- Notifications Dropdown Menu -->
 	    <li class="nav-item dropdown">
 
