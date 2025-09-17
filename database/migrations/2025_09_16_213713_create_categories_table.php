@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->boolean('is_visible')->default(true);
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
