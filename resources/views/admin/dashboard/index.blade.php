@@ -4,7 +4,7 @@
 @endsection
 @section('admin_content_header')
     <div class="col-sm-6">
-        <h1 class="m-0">Dashboard</h1>
+        <h1 class="m-0">{{ ___('Dashboard') }}</h1>
     </div><!-- /.col -->
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
