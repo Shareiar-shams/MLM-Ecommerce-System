@@ -9,7 +9,7 @@
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
         ['label' => 'Dashboard', 'url' => route('admin.home')],
-        ['label' => 'Categories', 'url' => route('admin.categories')],
+        ['label' => 'Categories', 'url' => route('admin.product.categories')]
     ]" />
 @endsection
 @section('admin_vendor_css')
