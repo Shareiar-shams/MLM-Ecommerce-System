@@ -36,13 +36,41 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>Name</th>
+                                    <th>Parent Id</th>
+                                    <th>Image</th>
                                     <th>Description</th>
-                                    <th>URL</th>
-                                    <th>Created Time</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @forelse (categories as $category)
+                                    <tr>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->parent_id }}</td>
+                                        <td>
+                                            @if($category->image)
+                                                <img src="" alt="{{ $category->name }}" width="50">
+                                            @else
+                                                No Image
+                                            @endif
+                                        </td>
+                                        <td>{{ $category->description }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.product.category.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <form action="{{ route('admin.product.category.destroy', $category->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    
+                                @empty
+                                    <tr>
+                                        <td colspan="5">No categories found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
