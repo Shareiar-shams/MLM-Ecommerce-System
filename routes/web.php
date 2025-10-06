@@ -32,8 +32,8 @@ Route::prefix('admin')->name('admin.')->group( function () {
     // ========================================
     Route::middleware(['admin', 'localization'])->group(function () {
         require __DIR__.'/Admin/dashboard.php';
-        // Product Categories
-        require __DIR__.'/Admin/categories.php';
+        // theme settings
+        require __DIR__.'/Admin/theme.php';
         // localization
         require __DIR__.'/Admin/localization.php';
     });

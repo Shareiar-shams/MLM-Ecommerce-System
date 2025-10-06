@@ -10,13 +10,61 @@
 (function ($) {
   'use strict'
 
-  // setTimeout(function () {
-  //   if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
-  //     localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
-  //     // eslint-disable-next-line no-alert
-  //     alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
-  //   }
-  // }, 1000)
+  // Function to save theme settings
+  function saveThemeSettings() {
+    const settings = {
+      darkMode: $('body').hasClass('dark-mode'),
+      navbarFixed: $('body').hasClass('layout-navbar-fixed'),
+      sidebarCollapsed: $('body').hasClass('sidebar-collapse'),
+      sidebarFixed: $('body').hasClass('layout-fixed'),
+      navbarColor: $('.main-header').attr('class').match(/navbar-[a-z]*/g)?.[0] || '',
+      sidebarColor: $('.main-sidebar').attr('class').match(/sidebar-(dark|light)-[a-z]*/g)?.[0] || '',
+      accentColor: $('body').attr('class').match(/accent-[a-z]*/g)?.[0] || '',
+      brandColor: $('.brand-link').attr('class').match(/navbar-[a-z]*/g)?.[0] || ''
+    };
+
+    $.ajax({
+      url: '/admin/theme-settings',
+      method: 'POST',
+      data: { 
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        settings: settings 
+      },
+      success: function(response) {
+        console.log('Theme settings saved');
+      },
+      error: function(xhr) {
+        console.error('Error saving theme settings');
+      }
+    });
+  }
+
+  // Function to load theme settings
+  function loadThemeSettings() {
+    $.ajax({
+      url: '/admin/theme-settings',
+      method: 'GET',
+      success: function(response) {
+        if (response.settings) {
+          const settings = response.settings;
+          
+          if (settings.darkMode) $('body').addClass('dark-mode');
+          if (settings.navbarFixed) $('body').addClass('layout-navbar-fixed');
+          if (settings.sidebarCollapsed) $('body').addClass('sidebar-collapse');
+          if (settings.sidebarFixed) $('body').addClass('layout-fixed');
+          if (settings.navbarColor) $('.main-header').addClass(settings.navbarColor);
+          if (settings.sidebarColor) $('.main-sidebar').addClass(settings.sidebarColor);
+          if (settings.accentColor) $('body').addClass(settings.accentColor);
+          if (settings.brandColor) $('.brand-link').addClass(settings.brandColor);
+        }
+      }
+    });
+  }
+
+  // Load settings when page loads
+  $(document).ready(function() {
+    loadThemeSettings();
+  });
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -74,6 +122,7 @@
     } else {
       $('body').removeClass('dark-mode')
     }
+    saveThemeSettings();
   })
   var $dark_mode_container = $('<div />', { class: 'mb-4' }).append($dark_mode_checkbox).append('<span>Dark Mode</span>')
   $container.append($dark_mode_container)
@@ -90,6 +139,7 @@
     } else {
       $('body').removeClass('layout-navbar-fixed')
     }
+    saveThemeSettings();
   })
   var $header_fixed_container = $('<div />', { class: 'mb-1' }).append($header_fixed_checkbox).append('<span>Fixed</span>')
   $container.append($header_fixed_container)
@@ -510,6 +560,7 @@
     navbar_all_colors.forEach(function (color) {
       $main_header.removeClass(color)
     })
+    saveThemeSettings();
 
     $(this).removeClass().addClass('custom-select mb-3 text-light border-0 ')
 
