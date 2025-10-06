@@ -12,11 +12,12 @@ use App\Models\Categories\Scopes\CategoriesScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\Administration\Categories\CategoriesObserver;
+use App\Traits\HasImage;
 
 #[ObservedBy([CategoriesObserver::class])]
 class Categories extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasImage, SoftDeletes;
 
     // Relations
     use CategoriesRelations;
