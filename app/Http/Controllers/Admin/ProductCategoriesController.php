@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories\CategoryCreateRequest;
 use App\Models\Categories\Categories;
 use App\Services\Admin\Categories\CategoriesService;
 use Illuminate\Contracts\View\View;
@@ -43,23 +44,15 @@ class ProductCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        $validatedData = $request->validate([
-            'parent_id' => 'nullable|exists:categories,id',
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status' => 'required|in:active,inactive',
-        ]);
-        Categories::create($validatedData);       
+        $this->categoriesService->createCategory($request->validated());
         $notification = array(
             'message' => 'Category create successfully!', 
             'alert-type' => 'success',
