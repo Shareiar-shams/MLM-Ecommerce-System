@@ -19,8 +19,12 @@
 <script src="{{asset('admin/assets/dist/js/demo.js')}}"></script>
 
 <!-- Page specific script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<!-- Toastr -->
+<script src="{{asset('admin/assets/plugins/toastr/toastr.min.js')}}"></script>
+<!-- SweetAlert2 -->
+<script src="{{asset('admin/assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 
+<!-- Preloader -->
 <script>
     var preloader = document.getElementById("loader");
     function myFunction(){
