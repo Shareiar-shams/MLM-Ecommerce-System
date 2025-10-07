@@ -15,6 +15,36 @@ class CategoriesService
         $this->imageService = $imageService;
     }
 
+    public function getCategoryById($id)
+    {
+        return Categories::findOrFail($id);
+    }
+
+    public function getAllCategories()
+    {
+        return Categories::with('children')->orderBy('id','DESC')->get();
+    }
+
+    public function getActiveCategories()
+    {
+        return Categories::active()->with('children')->orderBy('id','DESC')->get();
+    }
+
+    public function getCategoriesWithChildren($id)
+    {
+        return Categories::with('children')->childrenOf($id)->get();
+    }
+
+    public function getParentCategories()
+    {
+        return Categories::parent()->get();
+    }
+
+    public function getParentCatWithoutThisCategory($excludeId)
+    {
+        return Categories::parent()->withoutCategory($excludeId)->get();
+    }
+
     public function createCategory(array $data)
     {
         if (isset($data['image'])) {
@@ -24,9 +54,18 @@ class CategoriesService
         return Categories::create($data);
     }
 
+    public function toggleCategoryStatus($id)
+    {
+        $category = $this->getCategoryById($id);
+        $category->status = !$category->status;
+        $category->save();
+
+        return $category;
+    }
+
     public function updateCategory($id, array $data)
     {
-        $category = Categories::findOrFail($id);
+        $category = $this->getCategoryById($id);
         if(empty($data['parent_id'])){
             $data['parent_id'] = null;
         }
@@ -46,7 +85,7 @@ class CategoriesService
 
     public function deleteCategory($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = $this->getCategoryById($id);
 
         // Delete image from storage
         if ($category->image && Storage::disk('public')->exists('categories/' . $category->image)) {

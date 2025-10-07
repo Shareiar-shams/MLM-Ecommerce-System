@@ -10,9 +10,27 @@ trait CategoriesScopes
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeRoot($query)
+    public function scopeParent($query)
     {
         return $query->whereNull('parent_id');
+    }
+
+    // --- Scope for active categories ---
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    // --- Scope for excluding specific category ---
+    public function scopeWithoutCategory($query, $excludeId)
+    {
+        return $query->where('id', '!=', $excludeId);
+    }
+
+    // --- Scope for children of a given parent ---
+    public function scopeChildrenOf($query, $parentId)
+    {
+        return $query->where('parent_id', $parentId);
     }
 
     /**
