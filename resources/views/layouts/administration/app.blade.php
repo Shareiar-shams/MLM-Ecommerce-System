@@ -54,8 +54,11 @@
       </aside>
       <!-- /.control-sidebar -->
     </div>
+    
     <!-- ./wrapper -->
     @include('layouts.administration.partials_.admin-js')
+    <!-- Page specific script -->
+    @include('layouts.administration.partials_.confirm-delete')
     
 </body>
 </html>
