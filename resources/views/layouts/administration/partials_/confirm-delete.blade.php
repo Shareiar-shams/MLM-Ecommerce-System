@@ -25,4 +25,31 @@
             }
         });
     }
+
+    function confirmStatusChange(formId, actionText = 'change this status') {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You want to ${actionText}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, change it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+
+                Swal.fire({
+                    title: 'Processing...',
+                    text: 'Please wait while the status is being updated.',
+                    icon: 'info',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
 </script>
