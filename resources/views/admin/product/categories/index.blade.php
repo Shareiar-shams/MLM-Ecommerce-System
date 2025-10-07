@@ -4,7 +4,7 @@
 @endsection
 @section('admin_content_header')
     <div class="col-sm-6">
-        <h1 class="m-0">Product Categories</h1>
+        <h1 class="m-0">{{___('Product Categories')}}</h1>
     </div><!-- /.col -->
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
@@ -12,15 +12,14 @@
         ['label' => 'Categories', 'url' => route('admin.product.categories')]
     ]" />
 @endsection
+
 @section('admin_vendor_css')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{asset('admin/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    @include('admin.additionalObject.datatable-css')
 @endsection
 
 @section('admin_page_css')
 @endsection
+
 
 @section('admin_main_content')
 
@@ -29,7 +28,8 @@
         	<div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Categories</h3>
+                        <h3 class="card-title">{{ ___("Categories") }}</h3>
+                        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn-sm float-right">{{ ___('Add New Category') }}</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -40,35 +40,68 @@
                                     <th>Parent Id</th>
                                     <th>Image</th>
                                     <th>Description</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse (categories as $category)
+                                @forelse ($categories as $category)
                                     <tr>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->parent_id }}</td>
+                                        <td>{{ $category->parent->name ?? 'No Parent' }}</td>
                                         <td>
                                             @if($category->image)
-                                                <img src="" alt="{{ $category->name }}" width="50">
+                                                <img src="{{ $category->image_url }}" alt="{{ $category->name }}" width="50" height="50" style="object-fit: cover; border-radius: 8px;">
                                             @else
-                                                No Image
+                                                {{ ('No Image') }}
                                             @endif
                                         </td>
-                                        <td>{{ $category->description }}</td>
+                                        <td>{!! Str::limit(htmlspecialchars_decode($category->description), 150) !!}</td>
                                         <td>
-                                            <a href="{{ route('admin.product.category.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                            <form action="{{ route('admin.product.category.destroy', $category->id) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
-                                            </form>
+			                    		<div class="btn-group">
+						                    <button type="button" class="btn {{$category->status == true ? 'btn-success' : 'btn-danger'}} dropdown-toggle" data-toggle="dropdown">@if($category->status == true) Publish @else Unpublish @endif 
+						                    	<span class="sr-only">Toggle Dropdown</span>
+						                    </button>
+						                    <div class="dropdown-menu" role="menu">
+						                    	<form action="{{route('admin.product.categories.status',$category->id)}}" method="post" id="disable-form-category-status-{{$category->id}}" style="display: none;">
+			                              			@csrf
+			                              			@method('put')
+			                              			<input type="hidden" name="status" value="@if($category->status == true) 0 @else 1 @endif">
+			                            		</form>
+						                      	<a class="dropdown-item" href="#"
+                                                    onclick="confirmStatusChange('disable-form-category-status-{{ $category->id }}', '{{ $category->status ? 'unpublish' : 'publish' }} this category')">
+                                                    {{ $category->status ? 'Unpublish' : 'Publish' }}
+                                                </a>
+						                    </div>
+						                </div>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Options
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a class="dropdown-item" href="{{route('admin.categories.edit',$category->id)}}"><i class="fas fa-edit"></i> Edit</a>
+
+                                                    <a class="dropdown-item text-danger" href="#"
+                                                    onclick="event.preventDefault(); confirmDelete('delete-form-product-category-{{ $category->id }}')">
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </a>
+
+                                                    <form id="delete-form-product-category-{{ $category->id }}" 
+                                                        action="{{ route('admin.categories.destroy', $category->id) }}" 
+                                                        method="POST" style="display:none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     
                                 @empty
                                     <tr>
-                                        <td colspan="5">No categories found.</td>
+                                        <td colspan="5" class="text-center">No categories found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -84,33 +117,7 @@
     </div><!-- /.container-fluid -->
     
 @endsection
-@section('admin_vendor_js')
-
-    
-@endsection
 
 @section('admin_page_js')
-    <!-- DataTables  & Plugins -->
-	<script src="{{asset('admin/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/jszip/jszip.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-	<script src="{{asset('admin/assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-	<!-- Page specific script -->
-	<script>
-		$(function () {
-		    $("#example1").DataTable({
-		      	"responsive": true, "lengthChange": false, "autoWidth": false,
-		      	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-		    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		    
-		});
-	</script>
+    @include('admin.additionalObject.datatable-js')
 @endsection
