@@ -10,6 +10,7 @@ Route::prefix('product')->name('product.')->controller(ProductCategoriesControll
 
     Route::get('categoies', 'index')->name('categories');
     Route::post('subcategories', 'subcategories')->name('subcategories');
+    Route::put('categories/status/{id}', 'status')->name('categories.status');
 });
 // Main Controller Resource
 Route::resource('product/categories', ProductCategoriesController::class);
