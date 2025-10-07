@@ -23,7 +23,7 @@ class ProductCategoriesController extends Controller
      */
     public function index(): View
     {
-        $categories = Categories::with('children')->orderBy('id','DESC')->get();
+        $categories = $this->categoriesService->getAllCategories();
         return view('admin.product.categories.index',compact('categories'));
     }
 
@@ -32,9 +32,7 @@ class ProductCategoriesController extends Controller
      */
     public function subcategories(Request $request)
     {
-        $parent_id = $request->parent_id;
-         
-        $subcategories = Categories::where('parent_id',$parent_id)->with('children')->get();
+        $subcategories = $this->categoriesService->getCategoriesWithChildren($request->parent_id);
         return response()->json([
             'subcategories' => $subcategories
         ]);
@@ -45,7 +43,7 @@ class ProductCategoriesController extends Controller
      */
     public function create()
     {
-        $categories = Categories::whereNull('parent_id')->get();
+        $categories = $this->categoriesService->getParentCategories();
         return view('admin.product.categories.create', compact('categories'));
     }
 
@@ -67,7 +65,7 @@ class ProductCategoriesController extends Controller
      */
     public function status($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = $this->categoriesService->getCategoryById($id);
         $category->status = !$category->status;
         $category->save();
 
@@ -90,7 +88,7 @@ class ProductCategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        $category =  Categories::findOrFail($id);
+        $category =  $this->categoriesService->getCategoryById($id);
         $categories = Categories::whereNull('parent_id')->where('id', '!=', $category->id)->get();
         return view('admin.product.categories.edit', compact('category','categories'));
     }
