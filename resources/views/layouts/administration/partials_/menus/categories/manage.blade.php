@@ -1,6 +1,6 @@
 <!-- File: resources/views/admin/layouts/partials_/sidebar-nav/categories/manage.blade.php -->
 @php
-    $isActive = Route::is('admin.product.categories') || Route::is('admin.product.category.create');
+    $isActive = Route::is('admin.product.categories') || Route::is('admin.categories.create');
 @endphp
 <div class="nav-item {{ $isActive ? 'menu-open' : '' }}">
     <x-ad-nav-link class="nav-link {{ $isActive ? 'active' : '' }}">
@@ -18,7 +18,7 @@
             </x-ad-nav-link>
         </li>
         <li class="nav-item">
-            <x-ad-nav-link href="{{ route('admin.categories.create') }}" class="nav-link {{ Route::is('admin.product.category.create') ? 'active' : '' }}">
+            <x-ad-nav-link href="{{ route('admin.categories.create') }}" class="nav-link {{ Route::is('admin.categories.create') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Create Category</p>
             </x-ad-nav-link>
