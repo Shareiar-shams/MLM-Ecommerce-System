@@ -2,8 +2,11 @@
 
 namespace App\Models\Categories\Accessors;
 
+use App\Services\Admin\ImageService;
+
 trait CategoriesAccessors
 {
+
     /**
      * Get the category's display name.
      *
@@ -12,6 +15,33 @@ trait CategoriesAccessors
     public function getDisplayNameAttribute(): string
     {
         return $this->name ?? 'Unnamed Category';
+    }
+
+    /**
+     * Get the plain text version of the description
+     */
+    public function getDecodedDescriptionAttribute(): ?string
+    {
+        if (!$this->description) {
+            return null;
+        }
+        
+        // First decode HTML entities
+        $decoded = htmlspecialchars_decode($this->description);
+        // Strip HTML tags and convert line breaks to spaces
+        $plainText = strip_tags(str_replace(['<br>', '<br/>', '<br />', "\n", "\r"], ' ', $decoded));
+        // Remove extra whitespace
+        return preg_replace('/\s+/', ' ', trim($plainText));
+    }
+
+    /**
+     * Get the HTML version of the description
+     */
+    public function getHtmlDescriptionAttribute(): ?string
+    {
+        return $this->description
+            ? htmlspecialchars_decode($this->description)
+            : null;
     }
 
     /**
@@ -47,6 +77,7 @@ trait CategoriesAccessors
      */
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        $imageService = app(ImageService::class);
+        return $this->image ? $imageService->getSingleImageUrl('categories', $this->image) : asset('images/default-category.png');
     }
 }
