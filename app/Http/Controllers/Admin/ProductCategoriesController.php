@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\CategoryCreateRequest;
+use App\Http\Requests\Categories\CategoryUpdateRequest;
 use App\Models\Categories\Categories;
 use App\Services\Admin\Categories\CategoriesService;
 use Illuminate\Contracts\View\View;
@@ -22,7 +23,7 @@ class ProductCategoriesController extends Controller
      */
     public function index(): View
     {
-        $categories = Categories::with('children')->whereNull('parent_id')->orderBy('id','DESC')->get();
+        $categories = Categories::with('children')->orderBy('id','DESC')->get();
         return view('admin.product.categories.index',compact('categories'));
     }
 
@@ -44,7 +45,8 @@ class ProductCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.product.categories.create');
+        $categories = Categories::whereNull('parent_id')->get();
+        return view('admin.product.categories.create', compact('categories'));
     }
 
     /**
@@ -57,9 +59,24 @@ class ProductCategoriesController extends Controller
             'message' => 'Category create successfully!', 
             'alert-type' => 'success',
         );
-        return redirect(route('categories.index'))->with($notification);
+        return redirect(route('admin.product.categories'))->with($notification);
     }
 
+    /**
+     * Update category status
+     */
+    public function status($id)
+    {
+        $category = Categories::findOrFail($id);
+        $category->status = !$category->status;
+        $category->save();
+
+        $notification = array(
+            'message' => 'Category status updated successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
+    }
     /**
      * Display the specified resource.
      */
@@ -73,15 +90,22 @@ class ProductCategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category =  Categories::findOrFail($id);
+        $categories = Categories::whereNull('parent_id')->where('id', '!=', $category->id)->get();
+        return view('admin.product.categories.edit', compact('category','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
-        //
+        $this->categoriesService->updateCategory($id, $request->validated());
+        $notification = array(
+            'message' => 'Category update successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect(route('admin.product.categories'))->with($notification);
     }
 
     /**
@@ -89,6 +113,11 @@ class ProductCategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->categoriesService->deleteCategory($id);
+        $notification = array(
+            'message' => 'Category delete successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 }
