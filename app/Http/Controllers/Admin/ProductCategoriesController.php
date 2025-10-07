@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\CategoryCreateRequest;
 use App\Http\Requests\Categories\CategoryUpdateRequest;
-use App\Models\Categories\Categories;
 use App\Services\Admin\Categories\CategoriesService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -65,10 +64,7 @@ class ProductCategoriesController extends Controller
      */
     public function status($id)
     {
-        $category = $this->categoriesService->getCategoryById($id);
-        $category->status = !$category->status;
-        $category->save();
-
+        $this->categoriesService->toggleCategoryStatus($id);
         $notification = array(
             'message' => 'Category status updated successfully!', 
             'alert-type' => 'success',
@@ -89,7 +85,7 @@ class ProductCategoriesController extends Controller
     public function edit(string $id)
     {
         $category =  $this->categoriesService->getCategoryById($id);
-        $categories = Categories::whereNull('parent_id')->where('id', '!=', $category->id)->get();
+        $categories = $this->categoriesService->getParentCatWithoutThisCategory($category->id);
         return view('admin.product.categories.edit', compact('category','categories'));
     }
 
