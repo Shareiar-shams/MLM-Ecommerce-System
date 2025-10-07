@@ -4,7 +4,7 @@
 @endsection
 @section('admin_content_header')
     <div class="col-sm-6">
-        <h1 class="m-0">{{___('Product Categories Create')}}</h1>
+        <h1 class="m-0">{{___('Product Categories Edit')}}</h1>
     </div><!-- /.col -->
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
@@ -15,7 +15,7 @@
 @section('admin_vendor_css')
 	<!-- summernote -->
   	<link rel="stylesheet" href="{{asset('admin/assets/plugins/summernote/summernote-bs4.min.css')}}">
-	<!-- Select2 -->
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endsection
@@ -27,13 +27,14 @@
 	@include('admin.validationError.error')
     <!-- container-fluid -->
 	<div class="container-fluid">
-		<div class="card">
+        <div class="card">
 			<div class="card-header">
 				<a class="btn btn-primary btn-sm float-right" href="{{ route('admin.product.categories') }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Back</a>
 			</div>
 		</div>
-    	<form action="{{route('admin.categories.store')}}" method="post" enctype="multipart/form-data">
+    	<form action="{{route('admin.categories.update', ['category' => $category->id])}}" method="post" enctype="multipart/form-data">
     		@csrf
+            @method('PUT')
         	<div class="row">
 	          	<div class="col-md-12 col-sm-12">
 		            <!-- general form elements -->
@@ -50,21 +51,21 @@
 				        <!-- /.card-header -->
 		                <div class="card-body">
 			                <div class="form-group">
-                                <label>Parent Category</label>
-								<select class="form-control select2bs4" name="parent_id" style="width: 100%;" data-placeholder="Select a Parent Category">
-									<option value=""></option>
-									@foreach ($categories as $category)
-										<option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>
-                                            {{ $category->full_path }}
-                                        </option>
+								<select class="form-control select2bs4" name="parent_id">
+									<option value="">Select a category</option>
+									@foreach ($categories as $objcategory)
+										<option value="{{ $objcategory->id }}" 
+											{{ $objcategory->id == $category->parent_id ? 'selected' : '' }}>
+											{{ $objcategory->name }}
+										</option>
 									@endforeach
 								</select>
 							</div>
 							<div class="form-group">
-								<input type="text" name="name" class="form-control" value="{{ old('name') }}" onkeyup="listingslug(this.value)" id="name" placeholder="Category Name" required>
+								<input type="text" name="name" class="form-control" value="{{ $category->name }}" onkeyup="listingslug(this.value)" id="name" placeholder="Category Name" required>
 							</div>
 							<div class="form-group">
-								<input type="text" name="slug" class="form-control" value="{{ old('slug') }}" id="slug" placeholder="Enter Slug" required>
+								<input type="text" name="slug" class="form-control" value="{{ $category->slug }}" id="slug" placeholder="Enter Slug" required>
 							</div>
 		                </div>
 		                <!-- /.card-body -->
@@ -84,7 +85,7 @@
 				        </div>
 				        <!-- /.card-header -->
 		                <div class="card-body">
-		                	<img src="" class="profile-user-img img-responsive" alt="Selected  Image" id="output">
+		                	<img src="{{ $category->image_url }}" class="profile-user-img img-responsive" alt="Selected  Image" id="output">
 			                <div class="form-group">
 			                    <label for="exampleInputFile">Image </label>
 			                    <div class="input-group">
@@ -115,7 +116,7 @@
 			            <div class="card-body">
 			              	<div class="from-group mt-3">
 				            	<label for="exampleInputEmail1">Description *</label>
-				              	<textarea id="summernote" name="description" placeholder="Description" required></textarea>
+				              	<textarea id="summernote" name="description" placeholder="Description" required>{{ $category->description }}</textarea>
 				            </div>
 
 			            </div>
@@ -141,8 +142,5 @@
 @endsection
 
 @section('admin_page_js')
-	<script>
-	    $('#output').hide();
-	</script>
 	@include('admin.additionalObject.createDocumentScript')
 @endsection
