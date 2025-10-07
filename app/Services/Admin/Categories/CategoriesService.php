@@ -42,7 +42,7 @@ class CategoriesService
 
     public function getParentCatWithoutThisCategory($excludeId)
     {
-        return Categories::parent()->withoutCategory($excludeId)->get();
+        return Categories::parentCategory()->withoutCategory($excludeId)->get();
     }
 
     public function createCategory(array $data)
