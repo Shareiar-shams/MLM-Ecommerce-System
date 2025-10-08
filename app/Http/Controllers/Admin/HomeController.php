@@ -34,8 +34,7 @@ class HomeController extends Controller
     public function create()
     {
         $admin = auth('admin')->user();
-        $activities = $admin->activities()->latest()->get()->take(10);
- 
+        $activities = $this->dashboardService->activities($admin, 10);
         return view('admin.profile.index', compact('activities'));
     }
 
@@ -45,7 +44,7 @@ class HomeController extends Controller
     public function activities(): View
     {
         $admin = auth('admin')->user();
-        $activities = $admin->activities()->latest()->get();
+        $activities = $this->dashboardService->activities($admin);
  
         return view('admin.dashboard.activities.index', compact('activities'));
     }
