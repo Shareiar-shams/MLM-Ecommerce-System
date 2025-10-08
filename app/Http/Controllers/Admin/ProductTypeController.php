@@ -45,6 +45,24 @@ class ProductTypeController extends Controller
     }
 
     /**
+     * Restore the specified resource from storage.
+     */
+    public function restore($id)
+    {
+        $this->typeService->restoreById($id);
+        return redirect()->back()->with('success', 'Type restored successfully!');
+    }
+
+    /**
+     * Restore all resource from storage.
+     */
+    public function restoreAll()
+    {
+        $this->typeService->restoreAll();
+        return redirect()->back()->with('success', 'All types restored successfully!');
+    }
+
+    /**
      * Change the status of the specified resource in storage.
      */
     public function status(string $id)
@@ -98,5 +116,14 @@ class ProductTypeController extends Controller
             'alert-type' => 'success',
         );
         return redirect(route('admin.product.type.index'))->with($notification);
+    }
+
+    /**
+     * Permanently delete the specified resource from storage.
+     */
+    public function forceDelete($id)
+    {
+        $this->typeService->forceDeleteById($id);
+        return redirect()->back()->with('success', 'Type permanently deleted!');
     }
 }
