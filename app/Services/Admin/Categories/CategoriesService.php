@@ -63,14 +63,8 @@ class CategoriesService
     }
 
     /**
-     * Permanently delete a category by ID.
+     * Create a new category.
      */
-    public function forceDeleteById(int $id): bool
-    {
-        $category = Categories::withTrashed()->find($id);
-        return $category ? $category->forceDelete() : false;
-    }
-
     public function createCategory(array $data)
     {
         if (isset($data['image'])) {
@@ -79,7 +73,9 @@ class CategoriesService
 
         return Categories::create($data);
     }
-
+    /**
+     * Toggle the status of a category by ID.
+     */
     public function toggleCategoryStatus($id)
     {
         $category = $this->getCategoryById($id);
@@ -89,6 +85,9 @@ class CategoriesService
         return $category;
     }
 
+    /**
+     * Update a category by ID.
+     */
     public function updateCategory($id, array $data)
     {
         $category = $this->getCategoryById($id);
@@ -122,5 +121,14 @@ class CategoriesService
         Categories::where('parent_id', $id)->update(['parent_id' => null]);
 
         return $category->delete();
+    }
+
+    /**
+     * Permanently delete a category by ID.
+     */
+    public function forceDeleteById(int $id): bool
+    {
+        $category = Categories::withTrashed()->find($id);
+        return $category ? $category->forceDelete() : false;
     }
 }
