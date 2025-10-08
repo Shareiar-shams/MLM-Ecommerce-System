@@ -45,6 +45,23 @@ class ProductCategoriesController extends Controller
         $categories = $this->categoriesService->getParentCategories();
         return view('admin.product.categories.create', compact('categories'));
     }
+    /**
+     * Restore a soft-deleted category by ID.
+     */
+    public function restore($id)
+    {
+        $this->categoriesService->restoreById($id);
+        return redirect()->back()->with('success', 'Category restored successfully!');
+    }
+
+    /**
+     * Restore all soft-deleted categories.
+     */
+    public function restoreAll()
+    {
+        $this->categoriesService->restoreAll();
+        return redirect()->back()->with('success', 'All Categories restored successfully!');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -113,5 +130,14 @@ class ProductCategoriesController extends Controller
             'alert-type' => 'success',
         );
         return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Permanently delete a category by ID.
+     */
+    public function forceDelete($id)
+    {
+        $this->categoriesService->forceDeleteById($id);
+        return redirect()->back()->with('success', 'Category permanently deleted!');
     }
 }

@@ -45,6 +45,32 @@ class CategoriesService
         return Categories::parentCategory()->withoutCategory($excludeId)->get();
     }
 
+    /**
+     * Restore a category by ID.
+     */
+    public function restoreById(int $id): bool
+    {
+        $category = Categories::withTrashed()->find($id);
+        return $category ? $category->restore() : false;
+    }
+
+    /**
+     * Restore all soft-deleted Categories.
+     */
+    public function restoreAll(): int
+    {
+        return Categories::onlyTrashed()->restore();
+    }
+
+    /**
+     * Permanently delete a category by ID.
+     */
+    public function forceDeleteById(int $id): bool
+    {
+        $category = Categories::withTrashed()->find($id);
+        return $category ? $category->forceDelete() : false;
+    }
+
     public function createCategory(array $data)
     {
         if (isset($data['image'])) {
