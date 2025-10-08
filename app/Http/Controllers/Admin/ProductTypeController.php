@@ -41,7 +41,20 @@ class ProductTypeController extends Controller
             'message' => 'Tag create successfully!', 
             'alert-type' => 'success',
         );
-        return redirect(route('admin.product.types.index'))->with($notification);
+        return redirect(route('admin.product.type.index'))->with($notification);
+    }
+
+    /**
+     * Change the status of the specified resource in storage.
+     */
+    public function status(string $id)
+    {
+        $this->typeService->changeStatus($id);
+        $notification = array(
+            'message' => 'Tag status change successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -71,7 +84,7 @@ class ProductTypeController extends Controller
             'message' => 'Tag update successfully!', 
             'alert-type' => 'success',
         );
-        return redirect(route('admin.product.types.index'))->with($notification);
+        return redirect(route('admin.product.type.index'))->with($notification);
     }
 
     /**
@@ -84,6 +97,6 @@ class ProductTypeController extends Controller
             'message' => 'Tag delete successfully!', 
             'alert-type' => 'success',
         );
-        return redirect(route('admin.product.types.index'))->with($notification);
+        return redirect(route('admin.product.type.index'))->with($notification);
     }
 }

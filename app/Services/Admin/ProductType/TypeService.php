@@ -13,9 +13,19 @@ class TypeService
 
     public function createType($request)
     {
-        return ProductType::create($request);
+        return ProductType::create($request->all());
     }
 
+    public function changeStatus($id)
+    {
+        $type = $this->getTypeById($id);
+        if ($type) {
+            $type->status = !$type->status;
+            $type->save();
+            return $type;
+        }
+        return null;
+    }
     public function getTypeById($id)
     {
         return ProductType::find($id);
