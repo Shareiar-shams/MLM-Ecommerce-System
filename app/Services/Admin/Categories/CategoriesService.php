@@ -37,7 +37,7 @@ class CategoriesService
 
     public function getParentCategories()
     {
-        return Categories::parent()->get();
+        return Categories::parentCategory()->get();
     }
 
     public function getParentCatWithoutThisCategory($excludeId)
