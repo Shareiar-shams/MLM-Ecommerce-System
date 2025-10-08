@@ -13,6 +13,10 @@ class TranslatorService
     public function __construct($locale = 'en')
     {
         $this->locale = $locale;
+        if($this->locale === 'en') {
+            $this->translator = null;
+            return;
+        }
         $this->translator = new GoogleTranslate($locale);
     }
 
@@ -38,12 +42,13 @@ class TranslatorService
         $translated = $this->translator->translate($text);
 
         // 3. Save to DB for future use
-        Translation::create([
-            'source_text'     => $text,
-            'locale'          => $this->locale,
-            'translated_text' => $translated,
-        ]);
-
+        if($this->locale !== 'en') {
+            Translation::create([
+                'source_text'     => $text,
+                'locale'          => $this->locale,
+                'translated_text' => $translated,
+            ]);
+        }
         return $translated;
     }
 }
