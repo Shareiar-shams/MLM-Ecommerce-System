@@ -38,7 +38,7 @@ class ProductTypeController extends Controller
     {
         $this->typeService->createType($request);
         $notification = array(
-            'message' => 'Type create successfully!', 
+            'message' => 'Tag create successfully!', 
             'alert-type' => 'success',
         );
         return redirect(route('admin.product.types.index'))->with($notification);
@@ -68,7 +68,7 @@ class ProductTypeController extends Controller
     {
         $this->typeService->updateType($request, $id);
         $notification = array(
-            'message' => 'Type update successfully!', 
+            'message' => 'Tag update successfully!', 
             'alert-type' => 'success',
         );
         return redirect(route('admin.product.types.index'))->with($notification);
@@ -81,7 +81,7 @@ class ProductTypeController extends Controller
     {
         $this->typeService->deleteType($id);
         $notification = array(
-            'message' => 'Type delete successfully!', 
+            'message' => 'Tag delete successfully!', 
             'alert-type' => 'success',
         );
         return redirect(route('admin.product.types.index'))->with($notification);

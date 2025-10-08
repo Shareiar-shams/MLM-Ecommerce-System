@@ -1,15 +1,15 @@
 @extends('layouts.administration.app')
 @section('admin_title_content')
-    AHVision | Product Types
+    AHVision | Product Tags
 @endsection
 @section('admin_content_header')
     <div class="col-sm-6">
-        <h1 class="m-0">{{___('Product Types Edit')}}</h1>
+        <h1 class="m-0">{{___('Product Tags Edit')}}</h1>
     </div><!-- /.col -->
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
         ['label' => 'Dashboard', 'url' => route('admin.home')],
-        ['label' => 'Types', 'url' => route('admin.product.type.index')]
+        ['label' => 'Tags', 'url' => route('admin.product.type.index')]
     ]" />
 @endsection
 @section('admin_vendor_css')
