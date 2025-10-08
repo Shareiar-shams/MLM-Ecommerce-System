@@ -26,6 +26,7 @@ class AdminAuth
         if (in_array($method, ['POST', 'PUT', 'DELETE'])) {
             activity()
                 ->causedBy($admin)
+                ->event('admin_action')
                 ->withProperties([
                     'url' => $request->fullUrl(),
                     'method' => $method,
