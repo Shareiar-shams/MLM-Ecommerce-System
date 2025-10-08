@@ -58,22 +58,23 @@
                                         </td>
                                         <td>{!! Str::limit(htmlspecialchars_decode($category->description), 150) !!}</td>
                                         <td>
-			                    		<div class="btn-group">
-						                    <button type="button" class="btn {{$category->status == true ? 'btn-success' : 'btn-danger'}} dropdown-toggle" data-toggle="dropdown">@if($category->status == true) Publish @else Unpublish @endif 
-						                    	<span class="sr-only">Toggle Dropdown</span>
-						                    </button>
-						                    <div class="dropdown-menu" role="menu">
-						                    	<form action="{{route('admin.product.categories.status',$category->id)}}" method="post" id="disable-form-category-status-{{$category->id}}" style="display: none;">
-			                              			@csrf
-			                              			@method('put')
-			                              			<input type="hidden" name="status" value="@if($category->status == true) 0 @else 1 @endif">
-			                            		</form>
-						                      	<a class="dropdown-item" href="#"
-                                                    onclick="confirmStatusChange('disable-form-category-status-{{ $category->id }}', '{{ $category->status ? 'unpublish' : 'publish' }} this category')">
-                                                    {{ $category->status ? 'Unpublish' : 'Publish' }}
-                                                </a>
-						                    </div>
-						                </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn {{$category->status == true ? 'btn-success' : 'btn-danger'}} dropdown-toggle" data-toggle="dropdown">@if($category->status == true) Publish @else Unpublish @endif 
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <form action="{{route('admin.product.categories.status',$category->id)}}" method="post" id="disable-form-category-status-{{$category->id}}" style="display: none;">
+                                                        @csrf
+                                                        @method('put')
+                                                        <input type="hidden" name="status" value="@if($category->status == true) 0 @else 1 @endif">
+                                                    </form>
+                                                    <a class="dropdown-item" href="#"
+                                                        onclick="confirmStatusChange('disable-form-category-status-{{ $category->id }}', '{{ $category->status ? 'unpublish' : 'publish' }} this category')">
+                                                        {{ $category->status ? 'Unpublish' : 'Publish' }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Options
