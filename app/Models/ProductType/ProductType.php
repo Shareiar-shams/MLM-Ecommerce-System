@@ -28,5 +28,12 @@ class ProductType extends Model
 
     protected $casts = [];
 
+    /** The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    // Mass Assignable attributes
     protected $fillable = ['name', 'slug', 'status'];
 }
