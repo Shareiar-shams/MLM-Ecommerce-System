@@ -51,7 +51,11 @@ class ProductCategoriesController extends Controller
     public function restore($id)
     {
         $this->categoriesService->restoreById($id);
-        return redirect()->back()->with('success', 'Category restored successfully!');
+        $notification = array(
+            'message' => 'Category restored successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -60,7 +64,11 @@ class ProductCategoriesController extends Controller
     public function restoreAll()
     {
         $this->categoriesService->restoreAll();
-        return redirect()->back()->with('success', 'All Categories restored successfully!');
+        $notification = array(
+            'message' => 'All Categories restored successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -138,6 +146,10 @@ class ProductCategoriesController extends Controller
     public function forceDelete($id)
     {
         $this->categoriesService->forceDeleteById($id);
-        return redirect()->back()->with('success', 'Category permanently deleted!');
+        $notification = array(
+            'message' => 'Category permanently deleted!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 }
