@@ -1,15 +1,15 @@
 @extends('layouts.administration.app')
 @section('admin_title_content')
-    AHVision | Product Types
+    AHVision | Product Tags
 @endsection
 @section('admin_content_header')
     <div class="col-sm-6">
-        <h1 class="m-0">{{___('Product Types')}}</h1>
+        <h1 class="m-0">{{___('Product Tags')}}</h1>
     </div><!-- /.col -->
     <!-- breadcrumb -->
     <x-ad-breadcrumb :items="[
         ['label' => 'Dashboard', 'url' => route('admin.home')],
-        ['label' => 'Types', 'url' => route('admin.product.type.index')]
+        ['label' => 'Tags', 'url' => route('admin.product.type.index')]
     ]" />
 @endsection
 
@@ -28,7 +28,7 @@
         	<div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ ___("Types") }}</h3>
+                        <h3 class="card-title">{{ ___("Tags") }}</h3>
                         <a href="{{ route('admin.product.type.create') }}" class="btn btn-primary btn-sm float-right">{{ ___('Add New Type') }}</a>
                     </div>
                     <!-- /.card-header -->
@@ -59,7 +59,7 @@
                                                         <input type="hidden" name="status" value="@if($type->status == true) 0 @else 1 @endif">
                                                     </form>
                                                     <a class="dropdown-item" href="#"
-                                                        onclick="confirmStatusChange('disable-form-type-status-{{ $type->id }}', '{{ $type->status ? 'unpublish' : 'publish' }} this type')">
+                                                        onclick="confirmStatusChange('disable-form-type-status-{{ $type->id }}', '{{ $type->status ? 'unpublish' : 'publish' }} this tag')">
                                                         {{ $type->status ? 'Unpublish' : 'Publish' }}
                                                     </a>
                                                 </div>
@@ -92,7 +92,7 @@
                                     
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">No types found.</td>
+                                        <td colspan="5" class="text-center">No tags found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

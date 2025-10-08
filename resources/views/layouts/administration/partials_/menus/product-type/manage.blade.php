@@ -7,7 +7,7 @@
     <x-ad-nav-link class="nav-link">
         <i  class='fas fa-list-alt'></i>
         <p class="pl-2">
-            Manage Product Type
+            Manage Product Tag
             <i class="fas fa-angle-left right"></i>
         </p>
     </x-ad-nav-link>
@@ -16,13 +16,13 @@
             <a href="{{ route('admin.product.type.index') }}" class="nav-link {{ Route::is('admin.product.type.index') ? 'active' : '' }}">
             
                 <i class="far fa-circle nav-icon"></i>
-                <p>Product Type List</p>
+                <p>Product Tag List</p>
             </a>
 
             <a href="{{ route('admin.product.type.create') }}" class="nav-link {{ Route::is('admin.product.type.create') ? 'active' : '' }}">
             
                 <i class="far fa-circle nav-icon"></i>
-                <p>Create Product Type</p>
+                <p>Create Product Tag</p>
             </a>
         </li>
     </ul>
