@@ -11,7 +11,7 @@ class TypeUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class TypeUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:product_types,name,'.$this->route('id'),
+            'slug' => 'required|unique:product_types,slug,'.$this->route('id'),
         ];
     }
 }
