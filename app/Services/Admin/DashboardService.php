@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Admin\Admin;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,9 +16,24 @@ class DashboardService
         $this->imageService = $imageService;
     }
 
+    public function getAdminById(int $id): Admin
+    {
+        return Admin::findOrFail($id);
+    }
+
+    public function activities(object $admin, ?int $limit = null): Collection
+    {
+        $query = $admin->activities()->select('id', 'log_name', 'description', 'properties', 'created_at')->latest();
+        if ($limit) {
+            $query->limit($limit);
+        }
+
+        return $query->get();
+    }
+
     public function updateAdmin(int $id, array $data): Admin
     {
-        $admin = Admin::findOrFail($id);
+        $admin = $this->getAdminById($id);
         $admin->fill([
             'name'     => $data['name'],
             'position' => $data['position'] ?? null,
@@ -30,7 +46,7 @@ class DashboardService
 
     public function updatePassword(int $id, string $oldPassword, string $newPassword): array
     {
-        $admin = Admin::findOrFail($id);
+        $admin = $this->getAdminById($id);
 
         if (Hash::check($oldPassword, $admin->password)) {
             $admin->update([
@@ -51,7 +67,7 @@ class DashboardService
 
     public function updateProfileImage($request, $id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = $this->getAdminById($id);
 
         if ($request->hasFile('image')) {
             $filename = $this->imageService->uploadAndResize(
