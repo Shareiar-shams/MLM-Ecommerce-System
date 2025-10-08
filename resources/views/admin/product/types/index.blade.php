@@ -53,7 +53,7 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <form action="{{route('admin.product.categories.status',$type->id)}}" method="post" id="disable-form-type-status-{{$type->id}}" style="display: none;">
+                                                    <form action="{{route('admin.product.type.status',$type->id)}}" method="post" id="disable-form-type-status-{{$type->id}}" style="display: none;">
                                                         @csrf
                                                         @method('put')
                                                         <input type="hidden" name="status" value="@if($type->status == true) 0 @else 1 @endif">
@@ -71,7 +71,7 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <a class="dropdown-item" href="{{route('admin.categories.edit',$type->id)}}"><i class="fas fa-edit"></i> Edit</a>
+                                                    <a class="dropdown-item" href="{{route('admin.product.type.edit',$type->id)}}"><i class="fas fa-edit"></i> Edit</a>
 
                                                     <a class="dropdown-item text-danger" href="#"
                                                     onclick="event.preventDefault(); confirmDelete('delete-form-product-type-{{ $type->id }}')">
@@ -79,7 +79,7 @@
                                                     </a>
 
                                                     <form id="delete-form-product-type-{{ $type->id }}" 
-                                                        action="{{ route('admin.categories.destroy', $type->id) }}" 
+                                                        action="{{ route('admin.product.type.destroy', $type->id) }}" 
                                                         method="POST" style="display:none;">
                                                         @csrf
                                                         @method('DELETE')

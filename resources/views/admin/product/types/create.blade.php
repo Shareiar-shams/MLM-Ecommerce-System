@@ -32,7 +32,7 @@
 				<a class="btn btn-primary btn-sm float-right" href="{{ route('admin.product.type.index') }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Back</a>
 			</div>
 		</div>
-    	<form action="{{route('admin.product.type.create')}}" method="post">
+    	<form action="{{route('admin.product.type.store')}}" method="post">
     		@csrf
         	<div class="row">
 	          	<div class="col-md-12 col-sm-12">
@@ -50,7 +50,7 @@
 				        <!-- /.card-header -->
 		                <div class="card-body">
 							<div class="form-group">
-								<input type="text" name="name" class="form-control" value="{{ old('name') }}" onkeyup="listingslug(this.value)" id="name" placeholder="Category Name" required>
+								<input type="text" name="name" class="form-control" value="{{ old('name') }}" onkeyup="listingslug(this.value)" id="name" placeholder="Tags Name" required>
 							</div>
 							<div class="form-group">
 								<input type="text" name="slug" class="form-control" value="{{ old('slug') }}" id="slug" placeholder="Enter Slug" required>
