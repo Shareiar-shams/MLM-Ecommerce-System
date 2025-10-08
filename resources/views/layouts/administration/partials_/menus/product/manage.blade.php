@@ -1,3 +1,6 @@
+@php
+    $isActive = Route::is('admin.product.item.index') || Route::is('admin.product.item.create');
+@endphp
 <li class="nav-item">
     <x-ad-nav-link class="nav-link">
         <i  class='fab fa-product-hunt'></i>
@@ -16,7 +19,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('admin.product.item.index') }}" class="nav-link  {{ Route::is('admin.product.item.index') ? 'active' : '' }}">
             
                 <i class="far fa-circle nav-icon"></i>
                 <p>All Products</p>

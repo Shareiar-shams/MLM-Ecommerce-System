@@ -36,4 +36,14 @@ class ProductType extends Model
 
     // Mass Assignable attributes
     protected $fillable = ['name', 'slug', 'status'];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
