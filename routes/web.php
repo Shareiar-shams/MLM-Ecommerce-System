@@ -37,6 +37,8 @@ Route::prefix('admin')->name('admin.')->group( function () {
         require __DIR__.'/Admin/categories.php';
         // categories
         require __DIR__.'/Admin/type.php';
+        // products
+        require __DIR__.'/Admin/products.php';
         // theme settings
         require __DIR__.'/Admin/theme.php';
         // localization
