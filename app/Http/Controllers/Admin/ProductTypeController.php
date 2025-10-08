@@ -50,7 +50,11 @@ class ProductTypeController extends Controller
     public function restore($id)
     {
         $this->typeService->restoreById($id);
-        return redirect()->back()->with('success', 'Type restored successfully!');
+        $notification = array(
+            'message' => 'Type restored successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -59,7 +63,11 @@ class ProductTypeController extends Controller
     public function restoreAll()
     {
         $this->typeService->restoreAll();
-        return redirect()->back()->with('success', 'All types restored successfully!');
+        $notification = array(
+            'message' => 'All types restored successfully!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -124,6 +132,10 @@ class ProductTypeController extends Controller
     public function forceDelete($id)
     {
         $this->typeService->forceDeleteById($id);
-        return redirect()->back()->with('success', 'Type permanently deleted!');
+        $notification = array(
+            'message' => 'Type permanently deleted!', 
+            'alert-type' => 'success',
+        );
+        return redirect()->back()->with($notification);
     }
 }
