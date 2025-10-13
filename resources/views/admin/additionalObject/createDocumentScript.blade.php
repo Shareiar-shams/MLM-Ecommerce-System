@@ -22,6 +22,15 @@
             allowClear: true,
             placeholder: 'Select an option',
         });
+
+        // Initialize Select2
+        $('.select2').select2({
+            theme: 'bootstrap4',
+            width: '100%',
+            tags: false,
+            allowClear: true,
+            placeholder: 'Select an option',
+        });
     });
 
     function slugify(text) {

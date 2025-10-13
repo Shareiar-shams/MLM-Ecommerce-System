@@ -37,55 +37,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 		            	<div class="col-md-12">
-		            		<form action="{{ route('admin.product.item.index') }}" method="GET">
-		                        <div class="row">
-		                            <div class="col-3">
-		                                <div class="form-group">
-		                                    <label>Product Type :</label>
-		                                    <select class="select2" name="productType" style="width: 100%;">
-		                                        <option value="" selected>All Product</option>
-		                                        <option value="physical">Physical Product</option>
-		                                        <option value="affiliate">Affiliate Product</option>
-		                                        <option value="customize">Customize Product</option>
-		                                    </select>
-		                                </div>
-		                            </div>
-		                            <div class="col-3">
-		                                <div class="form-group">
-		                                    <label>Tags:</label>
-		                                    <select class="select2" name="is_type" style="width: 100%;">
-		                                        <option value="" selected>All Tags</option>
-		                                        @foreach($types as $type)
-			                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
-		                                        @endforeach
-		                                    </select>
-		                                </div>
-		                            </div>
-		                            <div class="col-3">
-		                                <div class="form-group">
-		                                    <label>Categories:</label>
-		                                    <select class="select2" name="category" style="width: 100%;">
-		                                        <option value="" selected>All Categories</option>
-		                                        @foreach ($categories as $category)
-									                <option value="{{ $category->id }}">{{ $category->name }}</option>
-									            @endforeach
-		                                    </select>
-		                                </div>
-		                            </div>
-		                            <div class="col-3">
-		                                <div class="form-group">
-		                                    <label>Order By:</label>
-		                                    <select class="select2" name="orderby" style="width: 100%;">
-		                                        <option selected value="ASC">Ascending Order</option>
-		                                        <option value="DESC">Descending Order</option>
-		                                    </select>
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="form-group">
-		                            <button type="submit" class="btn btn-primary">Filter Product</button>
-		                        </div>
-		                    </form>
+		            		@include('admin.product.item.partials_.filter')
 	                    </div>
 		                <table id="example1" class="table table-bordered table-striped">
 		                  	<thead>

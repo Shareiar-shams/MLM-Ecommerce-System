@@ -32,7 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = $this->productService->getCategories();
+        $types = $this->productService->getTypes();
+        return view('admin.product.item.create', compact('categories', 'types'));
     }
 
     /**

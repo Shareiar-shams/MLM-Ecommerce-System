@@ -11,15 +11,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group row">
-            <x-input-label for="language" :value="__('Language')" class="col-sm-2 col-form-label"/>
-            <div class="col-sm-10">
-                <select id="language" name="language" class="form-control">
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                </select>
-            </div>
-        </div>
+       
         <div class="form-group row">
             <x-input-label for="notifications" :value="__('Notifications')" class="col-sm-2 col-form-label"/>
             <div class="col-sm-10">

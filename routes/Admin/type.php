@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\ProductTypeController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('product')->name('product.')->controller(ProductTypeController::class)->group( function () {
+Route::prefix('product/')->name('product.')->controller(ProductTypeController::class)->group( function () {
     // ========================================
     // PRODUCT type
     // ========================================

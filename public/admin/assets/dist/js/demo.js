@@ -41,16 +41,28 @@
 
   // Function to load theme settings
   function loadThemeSettings() {
+    // First, ensure sidebar is expanded by default
+    $('body').removeClass('sidebar-collapse sidebar-closed');
+    
     $.ajax({
       url: '/admin/theme-settings',
       method: 'GET',
       success: function(response) {
         if (response.settings) {
           const settings = response.settings;
+          // Handle dark mode properly
+          const darkMode = (settings.darkMode === true || settings.darkMode === "true");
+          if (darkMode) {
+              $('body').addClass('dark-mode');
+              $('.control-sidebar input[type="checkbox"]:first').prop('checked', true);
+          } else {
+              $('body').removeClass('dark-mode');
+              $('.control-sidebar input[type="checkbox"]:first').prop('checked', false);
+          }
           
-          if (settings.darkMode) $('body').addClass('dark-mode');
           if (settings.navbarFixed) $('body').addClass('layout-navbar-fixed');
-          if (settings.sidebarCollapsed) $('body').addClass('sidebar-collapse');
+          // Only apply sidebar collapse if explicitly set to true
+          if (settings.sidebarCollapsed === true) $('body').addClass('sidebar-collapse');
           if (settings.sidebarFixed) $('body').addClass('layout-fixed');
           if (settings.navbarColor) $('.main-header').addClass(settings.navbarColor);
           if (settings.sidebarColor) $('.main-sidebar').addClass(settings.sidebarColor);
@@ -63,7 +75,14 @@
 
   // Load settings when page loads
   $(document).ready(function() {
+    // Remove sidebar collapse classes first
+    $('body').removeClass('sidebar-collapse sidebar-closed');
+    // Then load settings
     loadThemeSettings();
+    // Double check after a slight delay to ensure sidebar is expanded
+    setTimeout(function() {
+      $('body').removeClass('sidebar-collapse sidebar-closed');
+    }, 100);
   });
 
   function capitalizeFirstLetter(string) {
@@ -107,14 +126,14 @@
 
   // Checkboxes
 
-  $container.append(
-    '<h5>Customize AdminLTE</h5><hr class="mb-2"/>'
-  )
+  $container.append(`
+    <h5>Customize ${appName}</h5>
+    <hr class="mb-2"/>
+  `);
 
   var $dark_mode_checkbox = $('<input />', {
     type: 'checkbox',
     value: 1,
-    checked: $('body').hasClass('dark-mode'),
     class: 'mr-1'
   }).on('click', function () {
     if ($(this).is(':checked')) {
@@ -124,6 +143,8 @@
     }
     saveThemeSettings();
   })
+  // Set initial checkbox state based on body class
+  $dark_mode_checkbox.prop('checked', $('body').hasClass('dark-mode'))
   var $dark_mode_container = $('<div />', { class: 'mb-4' }).append($dark_mode_checkbox).append('<span>Dark Mode</span>')
   $container.append($dark_mode_container)
 

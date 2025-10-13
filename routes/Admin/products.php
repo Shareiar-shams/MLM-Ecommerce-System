@@ -8,11 +8,11 @@ Route::prefix('product')->name('product.')->controller(ProductController::class)
     // PRODUCT
     // ========================================
 
-    Route::get('index', 'index')->name('item.index');
-    Route::get('create', 'create')->name('item.create');
-    Route::post('store', 'store')->name('item.store');
-    Route::get('edit/{id}', 'edit')->name('item.edit');
-    Route::put('update/{id}', 'update')->name('item.update');
-    Route::delete('destroy/{id}', 'destroy')->name('item.destroy');
-    Route::put('status/{id}', 'status')->name('item.status');
+    Route::get('/index', 'index')->name('item.index');
+    Route::get('/create', 'create')->name('item.create');
+    Route::post('/store', 'store')->name('item.store');
+    Route::get('/edit/{id}', 'edit')->name('item.edit');
+    Route::put('/update/{id}', 'update')->name('item.update');
+    Route::delete('/destroy/{id}', 'destroy')->name('item.destroy');
+    Route::put('/status/{id}', 'status')->name('item.status');
 });

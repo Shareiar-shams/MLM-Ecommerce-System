@@ -15,6 +15,9 @@
 
 <!-- AdminLTE App -->
 <script src="{{asset('admin/assets/dist/js/adminlte.js')}}"></script>
+<script>
+    const appName = "{{ config('app.name') }}";
+</script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin/assets/dist/js/demo.js')}}"></script>
 

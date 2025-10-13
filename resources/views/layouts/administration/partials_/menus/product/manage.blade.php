@@ -1,7 +1,8 @@
 @php
-    $isActive = Route::is('admin.product.item.index') || Route::is('admin.product.item.create');
+    $isActive = Route::is('admin.product.item.index') || 
+    Route::is('admin.product.item.create');
 @endphp
-<li class="nav-item">
+<li class="nav-item {{ $isActive ? 'menu-open' : '' }}">
     <x-ad-nav-link class="nav-link">
         <i  class='fab fa-product-hunt'></i>
         <p class="pl-2">
@@ -11,16 +12,14 @@
     </x-ad-nav-link>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="" class="nav-link">
-            
+            <a href="{{ route('admin.product.item.create') }}" class="nav-link {{ Route::is('admin.product.item.create') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Add Product</p>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('admin.product.item.index') }}" class="nav-link  {{ Route::is('admin.product.item.index') ? 'active' : '' }}">
-            
+            <a href="{{ route('admin.product.item.index') }}" class="nav-link {{ Route::is('admin.product.item.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>All Products</p>
             </a>

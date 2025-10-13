@@ -23,7 +23,6 @@ require __DIR__.'/auth.php';
 // ========================================
 // ADMIN ROUTES
 // ========================================
-
 Route::prefix('admin')->name('admin.')->group( function () {
     require __DIR__.'/Admin/auth.php';
     
