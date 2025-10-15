@@ -23,7 +23,8 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('product_type');
             $table->json('tags')->nullable();
-            $table->json('specifications')->nullable();
+            $table->boolean('specifications')->default(false);
+            $table->json('specification_data')->nullable();
             $table->unsignedInteger('stock')->nullable();
             $table->decimal('price', 10, 2);
             $table->decimal('special_price', 10, 2)->nullable();

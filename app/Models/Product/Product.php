@@ -55,7 +55,7 @@ class Product extends Model
         'tags',
         'specifications',
         'specification_name',
-        'specification_description',
+        'specification_data',
         'stock',
         'type_id',
         'category_id',
