@@ -37,14 +37,14 @@
             <div class="form-group">
                 <label>Status:</label>
                 <select class="select2" name="status" style="width: 100%;">
-                    <option selected value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option selected value="1">Active</option>
+                    <option value="0">Inactive</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <button type="reset" class="btn btn-danger" onclick="location.reload()">Reset</button>
+        <a  class="btn btn-danger" href="{{route('admin.product.item.index')}}">Reset</a>
         <button type="submit" class="btn btn-primary">Filter Product</button>
     </div>
 </form>

@@ -154,12 +154,14 @@
 				        <!-- /.card-header -->
 		                <div class="card-body">
                             <div class="form-group" style="display: block; overflow: hidden; height: 100%;">
-                                
                                 <!-- This container will hold all preview images -->
                                 <div id="filediv" class="row"></div>
 
-                                <!-- Hidden file input -->
-                                <input name="gallery_image[]" class="form-control d-none" type="file" id="file" multiple />
+                                <!-- File inputs container -->
+                                <div id="gallery_inputs"></div>
+
+                                <!-- Hidden file input for selection -->
+                                <input type="file" class="form-control d-none" id="file" multiple accept="image/*" />
                             </div>
 
                             <!-- Add more button -->
@@ -376,7 +378,7 @@
 		                <div class="card-body">
 		                	<div class="form-group">
 			                    <label for="exampleInputEmail1">Total in stock *</label>
-			                    <input type="text" name="stock" class="form-control" id="exampleInputEmail1" placeholder="Total in stock" required>
+			                    <input type="number" name="stock" class="form-control" id="exampleInputEmail1" placeholder="Total in stock" required>
 			                </div>
 			                <div class="form-group">
 				                <label>Select Type *</label>
@@ -389,12 +391,8 @@
 			                </div>
 		                  	<div class="form-group">
 		                    	<label for="exampleInputEmail1">SKU *</label>
-		                    	<input type="text" name="sku" class="form-control" id="exampleInputEmail1" value="{{ Str::random(10) }}" placeholder="Enter SKU" required>
+		                    	<input type="text" name="sku" class="form-control" id="exampleInputEmail1" value="{{ Str::random(10) }}" placeholder="Enter sku" readonly>
 		                  	</div>
-			                <div class="form-group">
-			                    <label for="exampleInputPassword1">Video Link</label>
-			                    <input type="text" class="form-control" name="video_link" id="exampleInputPassword1" placeholder="Enter Video Link">
-			                </div>
 		                </div>
 		                <!-- /.card-body -->
 		            </div>
@@ -464,7 +462,20 @@
         tags: true,
 		width: '100%',
     });
-    
+	$(function() {
+		$('#type').select2({
+			tags: true,
+			createTag: function (params) {
+				let term = $.trim(params.term);
+				if (term === '') return null;
+				return {
+					id: term,     // 👈 pass the name itself as value
+					text: term,
+					newOption: true
+				};
+			}
+		});
+	});
     $(document).ready(function() {
         // Toggle product type fields
         $('#productType').on('change', function () {
@@ -551,18 +562,37 @@
                 imageCounter++;
                 const reader = new FileReader();
 
+                // Create a new file input for this image
+                const fileInput = $('<input>', {
+                    type: 'file',
+                    name: 'gallery_image[]',
+                    id: `gallery_input_${imageCounter}`,
+                    class: 'd-none'
+                });
+
+                // Create the preview container
                 const previewContainer = $(`
                     <div id="abcd${imageCounter}" class="col-md-3 col-sm-4 mb-3 text-center">
                         <div class="card shadow-sm">
                             <img id="previewimg${imageCounter}" 
                                 class="card-img-top" 
                                 style="width:100%; height:150px; object-fit:cover; border-radius:8px;" />
-                            <button type="button" class="btn btn-sm btn-danger mt-2 delete-image">
+                            <button type="button" class="btn btn-sm btn-danger mt-2 delete-image" data-counter="${imageCounter}">
                                 <i class="fa fa-trash"></i> Delete
                             </button>
                         </div>
                     </div>
                 `);
+
+                // Create a new DataTransfer object
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                
+                // Set the file to the input
+                fileInput[0].files = dataTransfer.files;
+                
+                // Add the file input to the form
+                $('#gallery_inputs').append(fileInput);
 
                 reader.onload = function(e) {
                     previewContainer.find('img').attr('src', e.target.result);
@@ -577,13 +607,19 @@
                 $('#add_more').val('Add More');
             }
 
-            // Clear input value to allow re-selection of same files
+            // Clear selection input value to allow re-selection of same files
             $(this).val('');
         });
 
         // Handle delete
         $(document).on('click', '.delete-image', function() {
+            const counter = $(this).data('counter');
+            
+            // Remove the preview
             $(this).closest('.col-md-3').remove();
+            
+            // Remove the corresponding file input
+            $(`#gallery_input_${counter}`).remove();
 
             // If all images are deleted, change button back to "Add File"
             if ($('#filediv').children().length === 0) {

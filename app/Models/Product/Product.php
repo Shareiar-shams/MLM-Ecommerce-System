@@ -12,11 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\Administration\Product\ProductObserver;
 use App\Traits\HasImage;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 #[ObservedBy([ProductObserver::class])]
 class Product extends Model
 {
-    use HasFactory, HasImage, SoftDeletes;
+    use HasFactory, HasImage, SoftDeletes, CascadeSoftDeletes;
 
     // Relations
     use ProductRelations;
@@ -32,6 +33,14 @@ class Product extends Model
 
     //Timestamps
     public $timestamps = true;
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    protected $cascadeDeletes = ['product_images', 'product_variations'];
 
     protected $casts = [
         'tags' => 'array',
@@ -48,13 +57,11 @@ class Product extends Model
         'sku',
         'affiliate_link',
         'featured_image',
-        'gallery_image',
         'short_description',
         'description',
         'product_type',
         'tags',
         'specifications',
-        'specification_name',
         'specification_data',
         'stock',
         'type_id',

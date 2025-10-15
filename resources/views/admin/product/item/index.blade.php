@@ -42,7 +42,7 @@
 		                <table id="example1" class="table table-bordered table-striped">
 		                  	<thead>
 				                <tr>
-				                    <th>No</th>
+				                    <th>Serial</th>
 				                    <th>Image</th>
 				                    <th>Name</th>
 				                    <th>Price</th>
@@ -53,54 +53,48 @@
 				                </tr>
 		                  	</thead>
 		                  	<tbody>
-	                  		@foreach($products as $data)
+	                  		@foreach($products as $key => $data)
 				                <tr>
-			                    	<td>{{$loop->index + 1}}</td>
+			                    	<td>{{serial($data, $key)}}</td>
 			                    	<td>
 			                    	@if (Str::startsWith($data->featured_image, 'https'))
 	                                    <img class="img-responsive" width="50" height="70" src="{{$data->featured_image}}" alt="Product Image {{$data->id}}">
 	                                @else
-	                                    <img class="img-responsive" width="50" height="70" src="{{$data->avater}}" alt="Product Image {{$data->id}}">
+	                                    <img class="img-responsive" width="50" height="70" src="{{$data->feature_image}}" alt="Product Image {{$data->id}}">
 	                                @endif
 			                    	</td>
 			                    	<td>{{$data->name}}</td>
 			                    	<td>{{ isset($data->special_price) ? $data->special_price : $data->price}}</td>
 			                    	
-			                    	<td>
-			                    		<div class="btn-group">
-						                    <button type="button" @if($data->status == true) class="btn btn-success dropdown-toggle" @else class="btn btn-danger dropdown-toggle" @endif data-toggle="dropdown">@if($data->status == true) Publish @else Unpublish @endif 
-						                    	<span class="sr-only">Toggle Dropdown</span>
-						                    </button>
-						                    <div class="dropdown-menu" role="menu">
-						                    	<form action="{{route('admin.product.item.status',$data->id)}}" method="post" id="disable-form-{{$data->id}}" style="display: none;">
-			                              			@csrf
-			                              			@method('put')
-			                              			<input type="hidden" name="status" value="@if($data->status == true) 0 @else 1 @endif">
-			                            		</form>
-						                      	<a class="dropdown-item" href="#" onclick="
-						                            if(confirm('Want to change this type status!'))
-						                            {
-						                                event.preventDefault();
-						                                document.getElementById('disable-form-{{$data->id}}').submit();
-						                            }
-						                            else
-						                            {
-						                                event.preventDefault();
-						                            }
-						                        ">@if($data->status == true) Unpublish @else Publish @endif</a>
-						                    </div>
-						                </div>
-			                    	</td>
+									<td>
+										<div class="btn-group">
+											<button type="button" class="btn {{$data->status == true ? 'btn-success' : 'btn-danger'}} dropdown-toggle" data-toggle="dropdown">@if($data->status == true) Publish @else Unpublish @endif 
+												<span class="sr-only">Toggle Dropdown</span>
+											</button>
+											<div class="dropdown-menu" role="menu">
+												<form action="{{route('admin.product.item.status',$data->id)}}" method="post" id="disable-form-product-status-{{$data->id}}" style="display: none;">
+													@csrf
+													@method('put')
+													<input type="hidden" name="status" value="@if($data->status == true) 0 @else 1 @endif">
+												</form>
+												<a class="dropdown-item" href="#"
+													onclick="confirmStatusChange('disable-form-product-status-{{ $data->id }}', '{{ $data->status ? 'unpublish' : 'publish' }} this product.')">
+													{{ $data->status ? 'Unpublish' : 'Publish' }}
+												</a>
+											</div>
+										</div>
+									</td>
 			                    	<td><label class="badge badge-primary">{{str_replace('Product', '', $data->type->name)}}</label></td>
 			                    	<td>
-			                    		@if($data->productType == 'physical')
+			                    		@if($data->product_type == 'physical')
 			                    			Normal
-			                    		@elseif($data->productType == 'affiliate')
+			                    		@elseif($data->product_type == 'affiliate')
 			                    			Affiliate
 			                    		@else
 			                    			Customize
 			                    		@endif
 			                    	</td>
+									
 			                    	<td>
 			                    		<div class="btn-group">
 						                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Options
@@ -110,7 +104,7 @@
 						                    		
                                                 <a class="dropdown-item" href="{{route('admin.product.item.edit',$data->id)}}"><i class="fas fa-angle-double-right"></i>Edit</a>
                                                 
-                                                <a class="dropdown-item" href="" target="_blank">
+                                                <a class="dropdown-item" href="{{route('admin.product.item.show',$data->id)}}" target="_blank">
                                                     <i class="fas fa-angle-double-right"></i> View
                                                 </a>
                                                 @if(!empty($data->productType) && $data->productType == "physical")
@@ -124,25 +118,17 @@
                                                     <a class="dropdown-item" href=""><i class="fas fa-angle-double-right"></i>External Design Options</a>
 
                                                 @endif
-						                      	<a class="dropdown-item" href="#" onclick="
+						                      	<a class="dropdown-item text-danger" href="#"
+												onclick="event.preventDefault(); confirmDelete('delete-form-product-item-{{ $data->id }}')">
+													<i class="fas fa-trash-alt"></i> Delete
+												</a>
 
-			                            			if(confirm('Are you Want to Uproot this!'))
-						                            {
-						                                event.preventDefault();
-						                                document.getElementById('delete-form-{{$data->id}}').submit();
-						                            }
-						                            else
-						                            {
-						                                event.preventDefault();
-						                            }
-						                        ">
-                                                    <i class="fas fa-angle-double-right"></i>
-                                                    {{ __('Delete') }}
-                                                </a>
-							                    <form action="{{route('admin.product.item.destroy',$data->id)}}" method="post" id="delete-form-{{$data->id}}" style="display: none;">
-                                                    @csrf
-                                                    @method('delete')
-						                        </form>
+												<form id="delete-form-product-item-{{ $data->id }}" 
+													action="{{ route('admin.product.item.destroy', $data->id) }}" 
+													method="POST" style="display:none;">
+													@csrf
+													@method('DELETE')
+												</form>
 						                    </div>
 						                </div>
 			                    	</td>

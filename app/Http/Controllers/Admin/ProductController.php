@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductCreateRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Services\Admin\Product\ProductService;
-
+use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected $productService;
@@ -14,16 +14,17 @@ class ProductController extends Controller
     public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
+        
     }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $types = $this->productService->getTypes();
         $categories = $this->productService->getCategories();
         
-        $products = $this->productService->getAll();
+        $products = $this->productService->getAll($request->all());
         return view('admin.product.item.index', compact('products', 'types', 'categories'));
     }
 
@@ -42,12 +43,14 @@ class ProductController extends Controller
      */
     public function store(ProductCreateRequest $request)
     {
-        $this->productService->create($request->validated());
+        $data = $request->validated();
+        $data['featured_image'] = $request->file('featured_image');
+        $this->productService->create($data);
         $notification = array(
             'message' => 'Product created successfully!', 
             'alert-type' => 'success',
         );
-        return redirect()->route('admin.products.item.index')->with($notification);
+        return redirect()->route('admin.product.item.index')->with($notification);
     }
 
     /**
