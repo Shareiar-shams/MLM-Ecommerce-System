@@ -13,11 +13,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\Administration\Categories\CategoriesObserver;
 use App\Traits\HasImage;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 #[ObservedBy([CategoriesObserver::class])]
 class Categories extends Model
 {
-    use HasFactory, HasImage, SoftDeletes;
+    use HasFactory, HasImage, SoftDeletes, CascadeSoftDeletes;
 
     // Relations
     use CategoriesRelations;
@@ -45,6 +46,8 @@ class Categories extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $cascadeDeletes = ['products'];
+    
     /**
      * The attributes that are mass assignable.
      *
