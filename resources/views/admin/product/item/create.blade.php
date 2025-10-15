@@ -389,7 +389,7 @@
 			                </div>
 		                  	<div class="form-group">
 		                    	<label for="exampleInputEmail1">SKU *</label>
-		                    	<input type="text" name="SKU" class="form-control" id="exampleInputEmail1" value="{{ Str::random(10) }}" placeholder="Enter SKU" required>
+		                    	<input type="text" name="sku" class="form-control" id="exampleInputEmail1" value="{{ Str::random(10) }}" placeholder="Enter SKU" required>
 		                  	</div>
 			                <div class="form-group">
 			                    <label for="exampleInputPassword1">Video Link</label>
