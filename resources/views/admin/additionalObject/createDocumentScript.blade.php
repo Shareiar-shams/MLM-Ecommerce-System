@@ -24,7 +24,7 @@
         });
 
         // Initialize Select2
-        $('.select2').select2({
+        $('.select2tagf').select2({
             theme: 'bootstrap4',
             width: '100%',
             tags: false,

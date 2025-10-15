@@ -85,7 +85,7 @@
 		                <div class="card-body">
                             <div class="form-group">
                                 <label>Product Type *</label>
-                                <select name="productType" id="productType" class="form-control select2" required>
+                                <select name="productType" id="productType" class="form-control select2tagf" required>
                                     <option value="physical">Physical</option>
                                     <option value="affiliate">Affiliate</option>
                                 </select>
@@ -340,7 +340,7 @@
 			            <div class="card-body">
 			              	<div class="form-group">
 				                <label>Select Category *</label>
-				                <select class="form-control select2" name="category_id" id="category" style="width: 100%;" required>
+				                <select class="form-control select2tagf" name="category_id" id="category" style="width: 100%;" required>
 				                    <option value="" selected="selected">Select One</option>
 				                    @foreach ($categories as $category)
 							            <option value="{{ $category->id }}" {{ $category->id === old('category_id') ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -350,7 +350,7 @@
 
 			            	<div class="form-group">
 				                <label>Select Sub Category</label>
-				                <select class="form-control select2" name="subcategory_id" id="subcategory" style="width: 100%;">
+				                <select class="form-control select2tagf" name="subcategory_id" id="subcategory" style="width: 100%;">
 				                    <option value="" selected="selected">Select One</option>
 				                    
 				                </select>
@@ -456,13 +456,13 @@
     $('.js-example-basic-single').select2({
         theme: "bootstrap4",
         tags: true,
-        width: '100%'
+		width: '100%',
     });
 
     $('.js-example-basic-single-meta').select2({
         theme: "bootstrap4",
         tags: true,
-        width: '100%'
+		width: '100%',
     });
     
     $(document).ready(function() {
