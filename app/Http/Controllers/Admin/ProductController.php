@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductCreateRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Models\Product\Product;
 use App\Services\Admin\Product\ProductService;
 use Illuminate\Http\Request;
 class ProductController extends Controller
@@ -64,15 +65,17 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = $this->productService->getCategories();
+        $types = $this->productService->getTypes();
+        return view('admin.product.item.edit', compact('categories', 'types' ,'product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductUpdateRequest $request, string $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         //
     }
