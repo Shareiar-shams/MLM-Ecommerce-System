@@ -178,11 +178,11 @@
 			            <div class="card-body">
 			            	<div class="from-group">
 				            	<label for="exampleInputEmail1">Short Description *</label>
-				              	<textarea class="form-control" name="short_description" placeholder="Short Description"></textarea>
+				              	<textarea class="form-control" name="short_description" placeholder="Short Description" value="{{$product->short_description}}" >{{$product->short_description}}</textarea>
 				            </div>
 			              	<div class="from-group mt-3">
 				            	<label for="exampleInputEmail1">Description *</label>
-				              	<textarea id="summernote" name="description" placeholder="Description" required></textarea>
+				              	<textarea id="summernote" name="description" placeholder="Description" value="{{$product->description}}" required>{{$product->description}}</textarea>
 				            </div>
 
 			            </div>
