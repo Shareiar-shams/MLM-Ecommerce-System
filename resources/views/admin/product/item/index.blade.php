@@ -102,9 +102,9 @@
 						                    </button>
 						                    <div class="dropdown-menu" role="menu">
 						                    		
-                                                <a class="dropdown-item" href="{{route('admin.product.item.edit',$data->id)}}"><i class="fas fa-angle-double-right"></i>Edit</a>
+                                                <a class="dropdown-item" href="{{route('admin.product.item.edit',['product' => $data])}}"><i class="fas fa-angle-double-right"></i>Edit</a>
                                                 
-                                                <a class="dropdown-item" href="{{route('admin.product.item.show',$data->id)}}" target="_blank">
+                                                <a class="dropdown-item" href="{{route('admin.product.item.show',['product' => $data])}}" target="_blank">
                                                     <i class="fas fa-angle-double-right"></i> View
                                                 </a>
                                                 @if(!empty($data->productType) && $data->productType == "physical")
