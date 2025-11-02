@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Admin Model
@@ -27,7 +28,7 @@ use Spatie\Activitylog\Traits\CausesActivity;
  */
 class Admin extends Authenticatable
 {
-    use Notifiable, HasImage, CausesActivity;
+    use Notifiable, HasImage, CausesActivity, HasRoles;
 
     use AdminRelations;
 
