@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ThemeSettingsController;
+use App\Http\Controllers\Admin\ThemeSetting\ThemeSettingsController;
 
 Route::controller(ThemeSettingsController::class)->group( function () {
     Route::post('/theme-settings', 'store')->name('theme.store');

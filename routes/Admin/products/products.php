@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\Product\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('product')->name('product.')->controller(ProductController::class)->group( function () {

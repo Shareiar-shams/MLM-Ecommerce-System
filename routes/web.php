@@ -24,23 +24,23 @@ require __DIR__.'/auth.php';
 // ADMIN ROUTES
 // ========================================
 Route::prefix('admin')->name('admin.')->group( function () {
-    require __DIR__.'/Admin/auth.php';
+    require __DIR__.'/Admin/auth/auth.php';
     
     // ========================================
     // AUTHENTICATED ADMIN ROUTES
     // ========================================
     Route::middleware(['admin', 'localization'])->group(function () {
         // dashboard
-        require __DIR__.'/Admin/dashboard.php';
+        require __DIR__.'/Admin/dashboard/dashboard.php';
         // categories
-        require __DIR__.'/Admin/categories.php';
+        require __DIR__.'/Admin/products/categories.php';
         // categories
-        require __DIR__.'/Admin/type.php';
+        require __DIR__.'/Admin/products/type.php';
         // products
-        require __DIR__.'/Admin/products.php';
+        require __DIR__.'/Admin/products/products.php';
         // theme settings
-        require __DIR__.'/Admin/theme.php';
+        require __DIR__.'/Admin/theme/theme.php';
         // localization
-        require __DIR__.'/Admin/localization.php';
+        require __DIR__.'/Admin/localization/localization.php';
     });
 });

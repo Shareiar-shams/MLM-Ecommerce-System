@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\LocalizationController;
+use App\Http\Controllers\Admin\Localization\LocalizationController;
 use Illuminate\Support\Facades\Route;
 
 
